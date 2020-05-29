@@ -1,0 +1,36 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Cập nhật chương trình học</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Cập nhật chương trình</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title"></h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form [formGroup]="programForm" (ngSubmit)="updateProgram(id)" id="program-form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="program-name">Tên chương trình học</label>
+        <input type="text" formControlName="name" name="name" [value]="name" class="form-control" id="program-name"
+               placeholder="Tên chương trình học">
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </div>
+  </form>
+</div>

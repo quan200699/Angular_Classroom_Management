@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {ListProgramComponent} from "./list-program/list-program.component";
 import {CreateProgramComponent} from "./create-program/create-program.component";
+import {EditProgramComponent} from "./edit-program/edit-program.component";
 
 
 
@@ -14,7 +15,11 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateProgramComponent
-  }
+  },
+  {
+    path: 'edit/:id',
+    component: EditProgramComponent
+  },
 ];
 
 @NgModule({
