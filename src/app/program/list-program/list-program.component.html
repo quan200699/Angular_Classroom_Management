@@ -1,0 +1,60 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Danh sách chương trình</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Danh sách chương trình</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"></h3>
+      <div class="card-tools">
+        <a routerLink="create" class="btn btn-sm btn-primary float-lg-right">
+          Tạo mới
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered" id="table-program">
+        <thead>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>Tên chương trình học</th>
+          <th style="width: 160px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let program of listProgram; index as i">
+          <td>{{i + 1}}</td>
+          <td>
+            <a [routerLink]="['info',program.id]">{{program.name}}</a>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-6">
+                <a [routerLink]="['edit',program.id]" class="btn btn-block btn-primary" style="color: white">
+                  <i class="fa fa-edit"></i>
+                </a>
+              </div>
+              <div class="col-6">
+                <a [routerLink]="['delete',program.id]" class="btn btn-block btn-danger" style="color: white">
+                  <i class="fa fa-remove"></i>
+                </a>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
