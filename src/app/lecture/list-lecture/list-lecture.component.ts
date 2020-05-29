@@ -1,34 +1,35 @@
 import {Component, OnInit} from '@angular/core';
-import {Classroom} from "../../interface/classroom";
 import {ClassroomService} from "../../service/classroom/classroom.service";
+import {Lecture} from "../../interface/lecture";
+import {LectureService} from "../../service/lecture/lecture.service";
 
 declare var $: any;
 declare var Swal: any;
 
 @Component({
-  selector: 'app-list-classroom',
-  templateUrl: './list-classroom.component.html',
-  styleUrls: ['./list-classroom.component.css']
+  selector: 'app-list-lecture',
+  templateUrl: './list-lecture.component.html',
+  styleUrls: ['./list-lecture.component.css']
 })
-export class ListClassroomComponent implements OnInit {
-  listClassroom: Classroom[];
+export class ListLectureComponent implements OnInit {
+  listLecture: Lecture[];
   id: number;
 
-  constructor(private classroomService: ClassroomService) {
+  constructor(private lectureService: LectureService) {
   }
 
   ngOnInit() {
-    this.getAllClassroom();
+    this.getAllLecture();
   }
 
-  getClassroomId(id: number) {
+  getLectureId(id: number) {
     this.id = id;
   }
 
-  deleteClassroom() {
-    this.classroomService.deleteClassroom(this.id).subscribe(() => {
-      this.classroomService.getAllClassroom().subscribe(listClassroom => {
-        this.listClassroom = listClassroom;
+  deleteLecture() {
+    this.lectureService.deleteLecture(this.id).subscribe(() => {
+      this.lectureService.getAllLecture().subscribe(listLecture => {
+        this.listLecture = listLecture;
       })
       $(function () {
         const Toast = Swal.mixin({
@@ -59,9 +60,9 @@ export class ListClassroomComponent implements OnInit {
     })
   }
 
-  getAllClassroom() {
-    this.classroomService.getAllClassroom().subscribe(listClassroom => {
-      this.listClassroom = listClassroom;
+  getAllLecture() {
+    this.lectureService.getAllLecture().subscribe(listLecture => {
+      this.listLecture = listLecture;
       $(function () {
         $('#table-classroom').DataTable({
           "paging": true,
