@@ -18,16 +18,16 @@ export class ClassroomService {
     return this.http.get<Classroom[]>(API_URL + '/classrooms');
   }
 
-  createClassroom(module: Classroom): Observable<Classroom> {
-    return this.http.post<Classroom>(API_URL + '/classrooms', module);
+  createClassroom(classroom: Classroom): Observable<Classroom> {
+    return this.http.post<Classroom>(API_URL + '/classrooms', classroom);
   }
 
   getClassroom(id: number): Observable<Classroom> {
     return this.http.get<Classroom>(API_URL + `/classrooms/${id}`)
   }
 
-  updateClassroom(id: number, module: Classroom): Observable<Classroom> {
-    return this.http.put<Classroom>(API_URL + `/classrooms/${id}`, module)
+  updateClassroom(id: number, classroom: Classroom): Observable<Classroom> {
+    return this.http.put<Classroom>(API_URL + `/classrooms/${id}`, classroom)
   }
 
   deleteClassroom(id: number): Observable<Classroom> {
