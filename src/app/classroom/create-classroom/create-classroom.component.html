@@ -1,0 +1,40 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Tạo phòng học mới</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Tạo phòng học</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title"></h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form [formGroup]="classroomForm" (ngSubmit)="createClassroom()" id="classroom-form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="name">Tên phòng học</label>
+        <input type="text" formControlName="name" name="name" class="form-control" id="name"
+               placeholder="tên phòng học">
+      </div>
+      <div class="form-group">
+        <label for="capacity">Sức chứa</label>
+        <input type="text" formControlName="capacity" name="capacity" class="form-control" id="capacity"
+               placeholder="sức chứa">
+      </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Tạo mới</button>
+    </div>
+  </form>
+</div>
