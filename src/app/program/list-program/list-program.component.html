@@ -46,9 +46,10 @@
                 </a>
               </div>
               <div class="col-6">
-                <a [routerLink]="['delete',program.id]" class="btn btn-block btn-danger" style="color: white">
-                  <i class="fa fa-remove"></i>
-                </a>
+                <button type="button" class="btn btn-block btn-danger" style="color: white" data-toggle="modal"
+                        data-target="#modal-delete" (click)="getProgramId(program.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
               </div>
             </div>
           </td>
@@ -56,5 +57,26 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Xóa chương trinh học</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có chắc muốn xóa chương trình này</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProgram()">Xóa</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 </section>
