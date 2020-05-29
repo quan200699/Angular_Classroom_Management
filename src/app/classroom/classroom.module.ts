@@ -4,6 +4,7 @@ import {ClassroomRoutingModule} from "./classroom-routing.module";
 import {CreateClassroomComponent} from "./create-classroom/create-classroom.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ListClassroomComponent} from "./list-classroom/list-classroom.component";
+import {EditClassroomComponent} from "./edit-classroom/edit-classroom.component";
 
 
 
@@ -11,6 +12,7 @@ import {ListClassroomComponent} from "./list-classroom/list-classroom.component"
   declarations: [
     ListClassroomComponent,
     CreateClassroomComponent,
+    EditClassroomComponent,
   ],
   imports: [
     CommonModule,

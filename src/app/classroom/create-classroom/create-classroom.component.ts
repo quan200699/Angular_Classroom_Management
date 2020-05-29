@@ -51,7 +51,8 @@ export class CreateClassroomComponent implements OnInit {
   createClassroom() {
     const classroom: Classroom = {
       id: this.classroomForm.value.id,
-      name: this.classroomForm.value.name
+      name: this.classroomForm.value.name,
+      capacity: this.classroomForm.value.capacity
     };
     if (classroom.name !== "") {
       this.classroomService.createClassroom(classroom).subscribe(() => {
