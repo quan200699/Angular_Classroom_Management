@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ClassroomService} from "../../service/classroom/classroom.service";
 import {Lecture} from "../../interface/lecture";
 import {LectureService} from "../../service/lecture/lecture.service";
 
@@ -64,7 +63,7 @@ export class ListLectureComponent implements OnInit {
     this.lectureService.getAllLecture().subscribe(listLecture => {
       this.listLecture = listLecture;
       $(function () {
-        $('#table-classroom').DataTable({
+        $('#table-lecture').DataTable({
           "paging": true,
           "lengthChange": false,
           "searching": false,
