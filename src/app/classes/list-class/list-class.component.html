@@ -33,11 +33,12 @@
           <th>Chương trình học</th>
           <th>Coach</th>
           <th>Instructor</th>
+          <th>Tutor</th>
           <th style="width: 160px"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let classes of listClasses; index as i">
+        <tr *ngFor="let classes of listClasses; index as i" (click)="getClassId(classes.id)">
           <td>{{i + 1}}</td>
           <td>
             <a [routerLink]="['info',classes.id]">{{classes.name}}</a>
@@ -62,6 +63,14 @@
               <option [ngValue]="null" disabled>Instructor</option>
               <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
                       [selected]="classes.instructor.id === instructor.id">{{instructor.name}}</option>
+            </select>
+          </td>
+          <td>
+            <select multiple class="form-control select2 select2-primary"
+                    data-dropdown-css-class="select2-primary"
+                    *ngIf="classes.instructor != null" style="width: 100%" id="tutor">
+              <option [ngValue]="null" disabled>Tutor</option>
+              <option *ngFor="let tutor of listTutor" [value]="tutor.id">{{tutor.name}}</option>
             </select>
           </td>
           <td>

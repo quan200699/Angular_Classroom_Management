@@ -6,6 +6,7 @@ import {LectureService} from "../../service/lecture/lecture.service";
 
 declare var $: any;
 declare var Swal: any;
+let tutorIds: any[];
 
 @Component({
   selector: 'app-list-class',
@@ -27,6 +28,7 @@ export class ListClassComponent implements OnInit {
     this.getAllClasses();
     this.getAllCoach();
     this.getAllInstructor();
+    this.getAllTutor();
   }
 
   getAllCoach() {
@@ -77,10 +79,46 @@ export class ListClassComponent implements OnInit {
     })
   }
 
+  addTutorToClass(classId: number) {
+    this.classesService.getClasses(classId).subscribe(async classes => {
+      const currentClass: Classes = {
+        id: classes.id,
+        name: classes.name,
+        classTime: classes.classTime,
+        program: {
+          id: classes.program.id
+        },
+        tutors: []
+      };
+      if (classes.coach != null) {
+        currentClass.coach = classes.coach;
+      }
+      if (classes.instructor != null) {
+        currentClass.instructor = classes.instructor;
+      }
+      for (let i = 0; i < tutorIds.length; i++) {
+        const tutor = await this.getLecture(tutorIds[i]);
+        currentClass.tutors.push(tutor);
+      }
+      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+      });
+    })
+  }
+
   getAllInstructor() {
     this.lectureService.findAllByJob(1).subscribe(listInstructor => {
       this.listInstructor = listInstructor;
     })
+  }
+
+  getAllTutor() {
+    this.lectureService.findAllByJob(1).subscribe(listTutor => {
+      this.listTutor = listTutor;
+    })
+  }
+
+  getLecture(id: number) {
+    return this.lectureService.getLecture(id).toPromise();
   }
 
   getClassId(id: number) {
@@ -122,6 +160,7 @@ export class ListClassComponent implements OnInit {
   }
 
   getAllClasses() {
+    var self = this;
     this.classesService.getAllClasses().subscribe(listClasses => {
       this.listClasses = listClasses;
       $(function () {
@@ -133,6 +172,13 @@ export class ListClassComponent implements OnInit {
           "info": true,
           "autoWidth": false,
         });
+        $('.select2').select2();
+        $('#tutor').on('select2:select', function (e, source) {
+          tutorIds = $(e.currentTarget).val();
+        });
+        $('#tutor').on('change', function () {
+          self.addTutorToClass(self.id);
+        })
       });
     });
   }
