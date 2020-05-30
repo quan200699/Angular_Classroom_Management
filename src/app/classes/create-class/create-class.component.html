@@ -1,0 +1,49 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Tạo lớp học mới</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Tạo lớp học</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title"></h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form [formGroup]="classForm" (ngSubmit)="createClass()" id="class-form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="name">Tên lớp học</label>
+        <input type="text" formControlName="name" name="name" class="form-control" id="name"
+               placeholder="tên lớp học">
+      </div>
+      <div class="form-group">
+        <label for="classTime">Giờ học lý thuyết</label>
+        <select class="custom-select" id="classTime" name="classTime" formControlName="classTime">
+          <option [ngValue]="null" disabled>Chọn giờ học lý thuyết</option>
+          <option *ngFor="let time of classTime" [value]="time">{{time}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="program">Chương trình học</label>
+        <select class="custom-select" id="program" name="program" formControlName="program">
+          <option [ngValue]="null" disabled>Chọn chương trình học</option>
+          <option *ngFor="let program of listProgram" [value]="program.id">{{program.name}}</option>
+        </select>
+      </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Tạo mới</button>
+    </div>
+  </form>
+</div>
