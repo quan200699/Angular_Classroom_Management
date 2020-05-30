@@ -98,7 +98,7 @@ export class CreateLectureComponent implements OnInit {
       if (index == -1) {
         this.selectedLanguageList.push(id);
       } else {
-        this.removeLanguageFromList(index);
+        this.selectedLanguageList = this.removeLanguageFromList(index);
       }
     }
   }
