@@ -1,1 +1,47 @@
-<p>info-class works!</p>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Danh sách học viên lớp {{className}}</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Thông tin lớp học</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"></h3>
+      <div class="card-tools">
+        <a routerLink="add-student" class="btn btn-sm btn-primary float-lg-right">
+          Thêm học viên
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered" id="table-student">
+        <thead>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>Mã học viên</th>
+          <th>Họ tên học viên</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let student of studentList; index as i">
+          <td>{{i + 1}}</td>
+          <td>{{student.studentId}}</td>
+          <td>
+            {{student.name}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
