@@ -1,0 +1,54 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Cập nhật thông tin giảng viên</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Cập nhật thông tin giảng viên</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title"></h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form [formGroup]="lectureForm" (ngSubmit)="updateLecture(id)" id="lecture-form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="program-name">Tên giảng viên</label>
+        <input type="text" formControlName="name" name="name" [value]="name" class="form-control" id="program-name"
+               placeholder="Tên chương trình học">
+      </div>
+
+      <div class="form-group">
+        <label for="job">Hình thức làm việc</label>
+        <select class="custom-select" id="job" name="job" formControlName="job" *ngIf="currentJob != null">
+          <option [ngValue]="null" disabled>Chọn hình thức làm việc</option>
+          <option *ngFor="let job of listJob" [value]="job.id"
+                  [selected]="job.id === currentJob.id">{{job.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="checkbox">Ngôn ngữ lập trình</label>
+        <div id="checkbox" class="custom-control custom-checkbox" *ngFor="let language of listLanguage; index as i">
+          <input class="custom-control-input" type="checkbox" id="language{{i}}" formControlName="language"
+                 (click)="addLanguageToList(language.id)" name="language"
+                 [checked]="language.id == currentLanguages[i].id" *ngIf="currentLanguages[i] != null">
+          <label for="language{{i}}" class="custom-control-label">{{language.name}}</label>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </div>
+  </form>
+</div>

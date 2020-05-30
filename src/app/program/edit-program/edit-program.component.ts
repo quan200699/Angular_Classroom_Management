@@ -16,7 +16,6 @@ declare var Swal: any;
 export class EditProgramComponent implements OnInit {
   sub: Subscription;
   name: string;
-  description: string;
   id: number;
   programForm: FormGroup = new FormGroup({
     name: new FormControl('')

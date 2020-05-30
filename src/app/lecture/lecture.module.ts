@@ -4,6 +4,7 @@ import {LectureRoutingModule} from "./lecture-routing.module";
 import {ListLectureComponent} from "./list-lecture/list-lecture.component";
 import {CreateLectureComponent} from "./create-lecture/create-lecture.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {EditLectureComponent} from "./edit-lecture/edit-lecture.component";
 
 
 
@@ -11,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     ListLectureComponent,
     CreateLectureComponent,
+    EditLectureComponent,
   ],
   imports: [
     CommonModule,
