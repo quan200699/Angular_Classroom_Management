@@ -32,4 +32,12 @@ export class LectureService {
   deleteLecture(id: number): Observable<Lecture> {
     return this.http.delete<Lecture>(API_URL + `/lectures/${id}`);
   }
+
+  findAllByJob(id: number): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>(API_URL + `/jobs/${id}/lectures`);
+  }
+
+  findAllByLanguage(id: number): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>(API_URL + `/languages/${id}/lectures`);
+  }
 }
