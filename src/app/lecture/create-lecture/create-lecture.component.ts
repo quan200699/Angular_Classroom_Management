@@ -19,10 +19,10 @@ export class CreateLectureComponent implements OnInit {
   lectureForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     job: new FormControl(),
-    language: new FormControl()
   });
   listJob: Job[];
   listLanguage: Language[];
+  selectedLanguageList: any[] = [];
 
   constructor(private lectureService: LectureService,
               private jobService: JobService,
@@ -83,44 +83,66 @@ export class CreateLectureComponent implements OnInit {
     })
   }
 
-  createLecture() {
+  addLanguageToList(id: number) {
+    if (this.selectedLanguageList.length == 0) {
+      this.selectedLanguageList.push(id);
+    } else {
+      let flag = true;
+      this.selectedLanguageList.map(language => {
+        if (id == language) {
+          flag = false;
+        }
+      })
+      if (flag) {
+        this.selectedLanguageList.push(id);
+      }
+    }
+  }
+
+  createLectureWithMultiLanguage() {
     const lecture: Lecture = {
       id: this.lectureForm.value.id,
       name: this.lectureForm.value.name,
-      job: this.lectureForm.value.job,
-      language: this.lectureForm.value.language
+      job: {
+        id: this.lectureForm.value.job
+      },
+      language: this.selectedLanguageList
     };
-    if (lecture.name !== "" && lecture.job != null) {
-      this.lectureService.createLecture(lecture).subscribe(() => {
-        $(function () {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-          });
+    if (lecture.name !== "" && lecture.job != null && this.selectedLanguageList.length != 0) {
+      this.createLecture(lecture);
+    }
+  }
 
-          Toast.fire({
-            type: 'success',
-            title: 'Tạo mới thành công'
-          });
+  createLecture(lecture: Lecture) {
+    this.lectureService.createLecture(lecture).subscribe(() => {
+      $(function () {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
         });
-        this.lectureForm.reset();
-      }, () => {
-        $(function () {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-          });
 
-          Toast.fire({
-            type: 'error',
-            title: 'Tạo mới thất bại'
-          });
+        Toast.fire({
+          type: 'success',
+          title: 'Tạo mới thành công'
         });
       });
-    }
+      this.lectureForm.reset();
+    }, () => {
+      $(function () {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+
+        Toast.fire({
+          type: 'error',
+          title: 'Tạo mới thất bại'
+        });
+      });
+    });
   }
 }
