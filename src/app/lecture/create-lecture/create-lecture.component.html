@@ -36,7 +36,7 @@
       <div class="form-group">
         <label for="checkbox">Ngôn ngữ lập trình</label>
         <div id="checkbox" class="custom-control custom-checkbox" *ngFor="let language of listLanguage; index as i">
-          <input class="custom-control-input" type="checkbox" id="customCheckbox{{i}}"
+          <input class="custom-control-input" type="checkbox" id="customCheckbox{{i}}" formControlName="language"
                  (click)="addLanguageToList(language.id)" name="language">
           <label for="customCheckbox{{i}}" class="custom-control-label">{{language.name}}</label>
         </div>
