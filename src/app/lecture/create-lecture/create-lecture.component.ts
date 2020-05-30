@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {LectureService} from "../../service/lecture/lecture.service";
 import {Lecture} from "../../interface/lecture";
+import {JobService} from "../../service/job/job.service";
+import {LanguageService} from "../../service/language/language.service";
+import {Job} from "../../interface/job";
+import {Language} from "../../interface/language";
 
 declare var $: any;
 declare var Swal: any;
@@ -15,12 +19,16 @@ export class CreateLectureComponent implements OnInit {
   lectureForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     job: new FormControl(),
-    language: new FormControl('')
+    language: new FormControl()
   });
-  listJobs: string[];
+  listJob: Job[];
+  listLanguage: Language[];
 
-  constructor(private lectureService: LectureService) {
-    this.listJobs = ['Fulltime', 'Partime sáng', 'Partime chiều'];
+  constructor(private lectureService: LectureService,
+              private jobService: JobService,
+              private languageService: LanguageService) {
+    this.getAllLanguage();
+    this.getAllJob();
   }
 
   ngOnInit() {
@@ -63,6 +71,18 @@ export class CreateLectureComponent implements OnInit {
     });
   }
 
+  getAllLanguage() {
+    this.languageService.getAllLanguage().subscribe(listLanguage => {
+      this.listLanguage = listLanguage;
+    })
+  }
+
+  getAllJob() {
+    this.jobService.getAllJob().subscribe(listJob => {
+      this.listJob = listJob;
+    })
+  }
+
   createLecture() {
     const lecture: Lecture = {
       id: this.lectureForm.value.id,
@@ -70,7 +90,7 @@ export class CreateLectureComponent implements OnInit {
       job: this.lectureForm.value.job,
       language: this.lectureForm.value.language
     };
-    if (lecture.name !== "") {
+    if (lecture.name !== "" && lecture.job != null) {
       this.lectureService.createLecture(lecture).subscribe(() => {
         $(function () {
           const Toast = Swal.mixin({

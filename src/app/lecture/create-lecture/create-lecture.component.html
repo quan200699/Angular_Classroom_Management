@@ -30,7 +30,7 @@
         <label for="job">Hình thức làm việc</label>
         <select class="custom-select" id="job" name="job" formControlName="job">
           <option [ngValue]="null" disabled>Chọn hình thức làm việc</option>
-          <option *ngFor="let job of listJobs" [value]="job">{{job}}</option>
+          <option *ngFor="let job of listJob" [value]="job.id">{{job.name}}</option>
         </select>
       </div>
     </div>
