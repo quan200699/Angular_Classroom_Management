@@ -31,6 +31,8 @@
           <th>Tên lớp</th>
           <th>Giờ học lý thuyết</th>
           <th>Chương trình học</th>
+          <th>Coach</th>
+          <th>Instructor</th>
           <th style="width: 160px"></th>
         </tr>
         </thead>
@@ -45,6 +47,19 @@
           </td>
           <td *ngIf="classes.program != null">
             {{classes.program.name}}
+          </td>
+          <td>
+            <select class="custom-select">
+              <option [ngValue]="null" disabled>Coach</option>
+              <option *ngFor="let coach of listCoach" [value]="coach.id">{{coach.name}}</option>
+            </select>
+          </td>
+          <td>
+
+            <select class="custom-select">
+              <option [ngValue]="null" disabled>Instructor</option>
+              <option *ngFor="let instructor of listInstructor" [value]="instructor.id">{{instructor.name}}</option>
+            </select>
           </td>
           <td>
             <div class="row">

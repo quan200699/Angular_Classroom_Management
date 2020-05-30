@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Classes} from "../../interface/classes";
 import {ClassesService} from "../../service/classes/classes.service";
+import {Lecture} from "../../interface/lecture";
+import {LectureService} from "../../service/lecture/lecture.service";
 
 declare var $: any;
 declare var Swal: any;
@@ -11,15 +13,32 @@ declare var Swal: any;
   styleUrls: ['./list-class.component.css']
 })
 export class ListClassComponent implements OnInit {
-
   listClasses: Classes[];
   id: number;
+  listCoach: Lecture[] = [];
+  listInstructor: Lecture[] = [];
+  listTutor: Lecture[] = [];
 
-  constructor(private classesService: ClassesService) {
+  constructor(private classesService: ClassesService,
+              private lectureService: LectureService) {
   }
 
   ngOnInit() {
     this.getAllClasses();
+    this.getAllCoach();
+    this.getAllInstructor();
+  }
+
+  getAllCoach() {
+    this.lectureService.findAllByJob(1).subscribe(listCoach => {
+      this.listCoach = listCoach;
+    })
+  }
+
+  getAllInstructor() {
+    this.lectureService.findAllByJob(1).subscribe(listInstructor => {
+      this.listInstructor = listInstructor;
+    })
   }
 
   getClassId(id: number) {
