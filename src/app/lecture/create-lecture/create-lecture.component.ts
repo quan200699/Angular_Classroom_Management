@@ -87,16 +87,38 @@ export class CreateLectureComponent implements OnInit {
     if (this.selectedLanguageList.length == 0) {
       this.selectedLanguageList.push(id);
     } else {
-      let flag = true;
-      this.selectedLanguageList.map(language => {
-        if (id == language) {
-          flag = false;
+      let index = -1;
+      for (let i = 0; i < this.selectedLanguageList.length; i++) {
+        if (this.selectedLanguageList[i] == id) {
+          index = i;
+          break;
         }
-      })
-      if (flag) {
+      }
+      if (index == -1) {
         this.selectedLanguageList.push(id);
+      } else {
+        this.removeLanguageFromList(index);
       }
     }
+  }
+
+  removeLanguageFromList(index: number): any[] {
+    let listLanguage = [];
+    if (index == 0) {
+      listLanguage = this.selectedLanguageList;
+      listLanguage.shift();
+    } else if (index == this.selectedLanguageList.length - 1) {
+      listLanguage = this.selectedLanguageList;
+      listLanguage.pop();
+    } else {
+      for (let i = 0; i < index; i++) {
+        listLanguage.push(this.selectedLanguageList[i]);
+      }
+      for (let i = index; i < this.selectedLanguageList.length - 1; i++) {
+        listLanguage.push(this.selectedLanguageList[i + 1]);
+      }
+    }
+    return listLanguage;
   }
 
   createLectureWithMultiLanguage() {
