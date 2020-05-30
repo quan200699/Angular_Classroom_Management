@@ -7,5 +7,5 @@ export interface Classes {
   coach?: any;
   instructor?: any;
   tutors?: any[];
-  students: any[];
+  students?: any[];
 }

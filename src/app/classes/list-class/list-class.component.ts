@@ -35,6 +35,48 @@ export class ListClassComponent implements OnInit {
     })
   }
 
+  addCoachToClass(classId: number, coachId: string) {
+    this.classesService.getClasses(classId).subscribe(classes => {
+      const currentClass: Classes = {
+        id: classes.id,
+        name: classes.name,
+        classTime: classes.classTime,
+        program: {
+          id: classes.program.id
+        },
+        coach: {
+          id: +coachId
+        }
+      };
+      if (classes.instructor != null) {
+        currentClass.instructor = classes.instructor;
+      }
+      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+      });
+    })
+  }
+
+  addInstructorToClass(classId: number, instructorId: string) {
+    this.classesService.getClasses(classId).subscribe(classes => {
+      const currentClass: Classes = {
+        id: classes.id,
+        name: classes.name,
+        classTime: classes.classTime,
+        program: {
+          id: classes.program.id
+        },
+        instructor: {
+          id: +instructorId
+        }
+      };
+      if (classes.coach != null) {
+        currentClass.coach = classes.coach;
+      }
+      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+      });
+    })
+  }
+
   getAllInstructor() {
     this.lectureService.findAllByJob(1).subscribe(listInstructor => {
       this.listInstructor = listInstructor;

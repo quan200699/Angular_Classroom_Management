@@ -49,16 +49,19 @@
             {{classes.program.name}}
           </td>
           <td>
-            <select class="custom-select">
+            <select #selectList class="custom-select" *ngIf="classes.coach!=null"
+                    (change)="addCoachToClass(classes.id, selectList.value)">
               <option [ngValue]="null" disabled>Coach</option>
-              <option *ngFor="let coach of listCoach" [value]="coach.id">{{coach.name}}</option>
+              <option *ngFor="let coach of listCoach" [value]="coach.id"
+                      [selected]="classes.coach.id === coach.id">{{coach.name}}</option>
             </select>
           </td>
           <td>
-
-            <select class="custom-select">
+            <select #selectList class="custom-select" *ngIf="classes.instructor != null"
+                    (change)="addInstructorToClass(classes.id, selectList.value)">
               <option [ngValue]="null" disabled>Instructor</option>
-              <option *ngFor="let instructor of listInstructor" [value]="instructor.id">{{instructor.name}}</option>
+              <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
+                      [selected]="classes.instructor.id === instructor.id">{{instructor.name}}</option>
             </select>
           </td>
           <td>
