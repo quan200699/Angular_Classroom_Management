@@ -4,6 +4,7 @@ import {ListClassComponent} from "./list-class/list-class.component";
 import {CreateClassComponent} from "./create-class/create-class.component";
 import {EditClassComponent} from "./edit-class/edit-class.component";
 import {InfoClassComponent} from "./info-class/info-class.component";
+import {AddStudentComponent} from "./add-student/add-student.component";
 
 
 
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path:'info/:id',
     component: InfoClassComponent
+  },
+  {
+    path:'info/:id/add-student',
+    component: AddStudentComponent
   }
 ];
 
