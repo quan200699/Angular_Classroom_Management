@@ -1,4 +1,4 @@
-export interface Language {
+export interface Job {
   id?: number;
   name?: string;
 }
