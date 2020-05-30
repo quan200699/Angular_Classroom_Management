@@ -125,7 +125,7 @@ export class EditLectureComponent implements OnInit {
     }
   }
 
-  removeLanguageFromList(index: number): any[] {
+  removeLanguageFromList(index: number) {
     let listLanguage = [];
     if (index == 0) {
       listLanguage = this.selectedLanguageList;
@@ -141,7 +141,7 @@ export class EditLectureComponent implements OnInit {
         listLanguage.push(this.selectedLanguageList[i + 1]);
       }
     }
-    return listLanguage;
+    this.selectedLanguageList = listLanguage;
   }
 
   async updateLecture(id: number) {

@@ -98,12 +98,12 @@ export class CreateLectureComponent implements OnInit {
       if (index == -1) {
         this.selectedLanguageList.push(id);
       } else {
-        this.selectedLanguageList = this.removeLanguageFromList(index);
+        this.removeLanguageFromList(index);
       }
     }
   }
 
-  removeLanguageFromList(index: number): any[] {
+  removeLanguageFromList(index: number) {
     let listLanguage = [];
     if (index == 0) {
       listLanguage = this.selectedLanguageList;
@@ -119,7 +119,7 @@ export class CreateLectureComponent implements OnInit {
         listLanguage.push(this.selectedLanguageList[i + 1]);
       }
     }
-    return listLanguage;
+    this.selectedLanguageList = listLanguage;
   }
 
   async createLectureWithMultiLanguage() {
