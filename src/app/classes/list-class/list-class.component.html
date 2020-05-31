@@ -67,7 +67,7 @@
                       [selected]="classes.coach!=null ? classes.coach.id === coach.id : false">{{coach.name}}</option>
             </select>
           </td>
-          <td>
+          <td (mouseenter)="getAllInstructor()" (mouseleave)="getAllInstructor()">
             <select #instructorId class="custom-select"
                     (change)="addInstructorToClass(classes.id, instructorId.value)">
               <option [ngValue]="null" disabled>Instructor</option>

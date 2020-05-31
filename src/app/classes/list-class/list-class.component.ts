@@ -34,7 +34,6 @@ export class ListClassComponent implements OnInit {
   ngOnInit() {
     this.getAllClasses();
     this.getAllCoach();
-    this.getAllInstructor();
     this.getAllClassroom();
   }
 
@@ -58,6 +57,7 @@ export class ListClassComponent implements OnInit {
       id: classes.id,
       name: classes.name,
       classTime: classes.classTime,
+      module: classes.module,
       program: {
         id: classes.program.id
       },
@@ -103,6 +103,7 @@ export class ListClassComponent implements OnInit {
       id: classes.id,
       name: classes.name,
       classTime: classes.classTime,
+      module: classes.module,
       program: {
         id: classes.program.id
       },
@@ -148,6 +149,7 @@ export class ListClassComponent implements OnInit {
       id: classes.id,
       name: classes.name,
       classTime: classes.classTime,
+      module: classes.module,
       program: {
         id: classes.program.id
       },
@@ -202,6 +204,7 @@ export class ListClassComponent implements OnInit {
         id: classes.id,
         name: classes.name,
         classTime: classes.classTime,
+        module: classes.module,
         program: {
           id: classes.program.id
         },
@@ -251,10 +254,16 @@ export class ListClassComponent implements OnInit {
     tutors = listTutor;
   }
 
-  getAllInstructor() {
-    this.lectureService.findAllByJob(1).subscribe(listInstructor => {
-      this.listInstructor = listInstructor;
-    })
+  async getAllInstructor() {
+    const classes = await this.getClasses(this.id);
+    let module = classes.module;
+    let name = classes.program.name;
+    let classTime = classes.classTime;
+    if (module == 'Module 1') {
+      this.classesService.getAllInstructorHasFreeTime(classTime).subscribe(listInstructor => {
+        this.listInstructor = listInstructor;
+      })
+    }
   }
 
   async getAllTutor() {

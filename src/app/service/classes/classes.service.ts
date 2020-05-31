@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Classes} from "../../interface/classes";
 import {Student} from "../../interface/student";
+import {Lecture} from "../../interface/lecture";
 
 const API_URL = `${environment.apiUrl}`
 
@@ -37,5 +38,9 @@ export class ClassesService {
 
   getAllStudentByClass(id: number): Observable<Student[]> {
     return this.http.get<Student[]>(API_URL + `/classes/${id}/students`);
+  }
+
+  getAllInstructorHasFreeTime(classTime: string): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>(API_URL + `/classes/instructors?classTime=` + classTime);
   }
 }
