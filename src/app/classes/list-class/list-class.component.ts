@@ -20,6 +20,7 @@ export class ListClassComponent implements OnInit {
   listCoach: Lecture[] = [];
   listInstructor: Lecture[] = [];
   listTutor: Lecture[] = [];
+  selected: boolean;
 
   constructor(private classesService: ClassesService,
               private lectureService: LectureService) {
@@ -49,10 +50,14 @@ export class ListClassComponent implements OnInit {
         },
         coach: {
           id: +coachId
-        }
+        },
+        tutors: []
       };
       if (classes.instructor != null) {
         currentClass.instructor = classes.instructor;
+      }
+      if (classes.tutors != null) {
+        currentClass.tutors = classes.tutors;
       }
       this.classesService.updateClasses(classId, currentClass).subscribe(() => {
       });
@@ -70,10 +75,14 @@ export class ListClassComponent implements OnInit {
         },
         instructor: {
           id: +instructorId
-        }
+        },
+        tutors: []
       };
       if (classes.coach != null) {
         currentClass.coach = classes.coach;
+      }
+      if (classes.tutors != null) {
+        currentClass.tutors = classes.tutors;
       }
       this.classesService.updateClasses(classId, currentClass).subscribe(() => {
       });

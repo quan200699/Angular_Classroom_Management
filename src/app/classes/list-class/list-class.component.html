@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let classes of listClasses; index as i" >
+        <tr *ngFor="let classes of listClasses; index as i">
           <td>{{i + 1}}</td>
           <td>
             <a [routerLink]="['info',classes.id]">{{classes.name}}</a>
@@ -50,44 +50,27 @@
             {{classes.program.name}}
           </td>
           <td>
-            <select #selectList class="custom-select" *ngIf="classes.coach!=null"
+            <select #selectList class="custom-select"
                     (change)="addCoachToClass(classes.id, selectList.value)">
               <option [ngValue]="null" disabled>Coach</option>
               <option *ngFor="let coach of listCoach" [value]="coach.id"
-                      [selected]="classes.coach.id === coach.id">{{coach.name}}</option>
-            </select>
-            <select #selectList class="custom-select" *ngIf="classes.coach==null"
-                    (change)="addCoachToClass(classes.id, selectList.value)">
-              <option [ngValue]="null" disabled>Coach</option>
-              <option *ngFor="let coach of listCoach" [value]="coach.id">{{coach.name}}</option>
+                      [selected]="classes.coach!=null ? classes.coach.id === coach.id : false">{{coach.name}}</option>
             </select>
           </td>
           <td>
-            <select #selectList class="custom-select" *ngIf="classes.instructor != null"
+            <select #selectList class="custom-select"
                     (change)="addInstructorToClass(classes.id, selectList.value)">
               <option [ngValue]="null" disabled>Instructor</option>
               <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
-                      [selected]="classes.instructor.id === instructor.id">{{instructor.name}}</option>
-            </select>
-            <select #selectList class="custom-select" *ngIf="classes.instructor == null"
-                    (change)="addInstructorToClass(classes.id, selectList.value)">
-              <option [ngValue]="null" disabled>Instructor</option>
-              <option *ngFor="let instructor of listInstructor" [value]="instructor.id">{{instructor.name}}</option>
+                      [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
             </select>
           </td>
           <td (click)="getClassId(classes.id)">
             <select multiple class="form-control select2 select2-primary tutor"
-                    data-dropdown-css-class="select2-primary"
-                    *ngIf="classes.tutors[i] == null" style="width: 100%">
+                    data-dropdown-css-class="select2-primary" style="width: 100%">
               <option [ngValue]="null" disabled>Tutor</option>
-              <option *ngFor="let tutor of listTutor" [value]="tutor.id">{{tutor.name}}</option>
-            </select>
-            <select multiple class="form-control select2 select2-primary tutor"
-                    data-dropdown-css-class="select2-primary"
-                    *ngIf="classes.tutors[i] != null" style="width: 100%">
-              <option [ngValue]="null" disabled>Tutor</option>
-              <option *ngFor="let tutor of listTutor" [value]="tutor.id"
-                      [selected]="classes.tutors[i].id === tutor.id">{{tutor.name}}</option>
+              <option *ngFor="let tutor of listTutor; index as j" [value]="tutor.id"
+                      [selected]="classes.tutors[j] != null ? classes.tutors[j].id == tutor.id : false">{{tutor.name}}</option>
             </select>
           </td>
           <td>
