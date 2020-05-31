@@ -35,7 +35,6 @@ export class ListClassComponent implements OnInit {
     this.getAllClasses();
     this.getAllCoach();
     this.getAllInstructor();
-    this.getAllTutor();
     this.getAllClassroom();
   }
 
@@ -258,10 +257,24 @@ export class ListClassComponent implements OnInit {
     })
   }
 
-  getAllTutor() {
-    this.lectureService.findAllByJob(1).subscribe(listTutor => {
-      this.listTutor = listTutor;
-    })
+  async getAllTutor() {
+    const classes = await this.getClasses(this.id);
+    let name = classes.program.name;
+    if (name.indexOf('Java') != -1) {
+      this.lectureService.findAllByLanguage(1).subscribe(listTutor => {
+        this.listTutor = listTutor;
+      })
+    }
+    if (name.indexOf('PHP') != -1) {
+      this.lectureService.findAllByLanguage(2).subscribe(listTutor => {
+        this.listTutor = listTutor;
+      })
+    }
+    if (name.indexOf('ASP') != -1) {
+      this.lectureService.findAllByLanguage(3).subscribe(listTutor => {
+        this.listTutor = listTutor;
+      })
+    }
   }
 
   getLecture(id: number) {
@@ -272,7 +285,7 @@ export class ListClassComponent implements OnInit {
     this.id = id;
   }
 
-  deleteClass()  {
+  deleteClass() {
     this.classesService.deleteClasses(this.id).subscribe(() => {
       this.classesService.getAllClasses().subscribe(listClasses => {
         this.listClasses = listClasses;

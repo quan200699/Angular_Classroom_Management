@@ -75,7 +75,7 @@
                       [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
             </select>
           </td>
-          <td>
+          <td (mouseenter)="getAllTutor()" (mouseleave)="getAllTutor()">
             <select multiple class="form-control select2 select2-primary tutor"
                     data-dropdown-css-class="select2-primary" style="width: 100%">
               <option [ngValue]="null" disabled>Tutor</option>
