@@ -21,7 +21,6 @@ export class ListClassComponent implements OnInit {
   id: number;
   listCoach: Lecture[] = [];
   listInstructor: Lecture[] = [];
-  listTutor: Lecture[] = [];
   listClassroom: Classroom[] = [];
   selected: boolean;
   message = "";
@@ -254,36 +253,46 @@ export class ListClassComponent implements OnInit {
     tutors = listTutor;
   }
 
-  async getAllInstructor() {
-    const classes = await this.getClasses(this.id);
+  async getAllInstructor(classId: number) {
+    const classes = await this.getClasses(classId);
     let module = classes.module;
     let name = classes.program.name;
     let classTime = classes.classTime;
     if (module == 'Module 1') {
-      this.classesService.getAllInstructorHasFreeTime(classTime).subscribe(listInstructor => {
-        this.listInstructor = listInstructor;
-      })
+      return this.classesService.getAllInstructorHasFreeTime(classTime).toPromise();
     }
-  }
-
-  async getAllTutor() {
-    const classes = await this.getClasses(this.id);
-    let name = classes.program.name;
+    let lectureHasFreeTime = await this.classesService.getAllInstructorHasFreeTime(classTime).toPromise();
+    let lecturesByLanguage = [];
+    let lectures = [];
     if (name.indexOf('Java') != -1) {
-      this.lectureService.findAllByLanguage(1).subscribe(listTutor => {
-        this.listTutor = listTutor;
-      })
+      lecturesByLanguage = await this.lectureService.findAllByLanguage(1).toPromise();
     }
     if (name.indexOf('PHP') != -1) {
-      this.lectureService.findAllByLanguage(2).subscribe(listTutor => {
-        this.listTutor = listTutor;
-      })
+      lecturesByLanguage = await this.lectureService.findAllByLanguage(2).toPromise();
     }
     if (name.indexOf('ASP') != -1) {
-      this.lectureService.findAllByLanguage(3).subscribe(listTutor => {
-        this.listTutor = listTutor;
-      })
+      lecturesByLanguage = await this.lectureService.findAllByLanguage(3).toPromise();
     }
+    for (let i = 0; i < lectureHasFreeTime.length; i++) {
+      for (let j = 0; j < lecturesByLanguage.length; j++) {
+        if (lectureHasFreeTime[i].id == lecturesByLanguage[j].id) {
+          lectures.push(lectureHasFreeTime[i]);
+        }
+      }
+    }
+    return lectures;
+  }
+
+  async getAllTutor(classId: number) {
+    const classes = await this.getClasses(classId);
+    let name = classes.program.name;
+    if (name.indexOf('Java') != -1) {
+      return this.lectureService.findAllByLanguage(1).toPromise();
+    }
+    if (name.indexOf('PHP') != -1) {
+      return this.lectureService.findAllByLanguage(2).toPromise();
+    }
+    return this.lectureService.findAllByLanguage(3).toPromise();
   }
 
   getLecture(id: number) {
@@ -340,6 +349,8 @@ export class ListClassComponent implements OnInit {
       this.listClasses = listClasses;
       this.listClasses.map(async classes => {
         classes.students = await this.getAllStudentByClasses(classes);
+        classes.tutorSelect = await this.getAllTutor(classes.id);
+        classes.instructorSelect = await this.getAllInstructor(classes.id);
       })
       $(function () {
         $('#table-classes').DataTable({

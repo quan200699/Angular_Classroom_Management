@@ -41,8 +41,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let classes of listClasses; index as i" (mouseenter)="getClassId(classes.id)"
-            (mouseleave)="getClassId(classes.id)">
+        <tr *ngFor="let classes of listClasses; index as i" (mouseenter)="getClassId(classes.id)">
           <td>{{i + 1}}</td>
           <td>
             <a [routerLink]="['info',classes.id]">{{classes.name}}</a>
@@ -56,7 +55,7 @@
           <td *ngIf="classes.program != null">
             {{classes.program.name}}
           </td>
-          <td >
+          <td>
             {{classes.module}}
           </td>
           <td>
@@ -67,19 +66,19 @@
                       [selected]="classes.coach!=null ? classes.coach.id === coach.id : false">{{coach.name}}</option>
             </select>
           </td>
-          <td (mouseenter)="getAllInstructor()" (mouseleave)="getAllInstructor()">
-            <select #instructorId class="custom-select"
+          <td>
+            <select #instructorId class="custom-select" id="instructor"
                     (change)="addInstructorToClass(classes.id, instructorId.value)">
               <option [ngValue]="null" disabled>Instructor</option>
-              <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
+              <option *ngFor="let instructor of classes.instructorSelect" [value]="instructor.id"
                       [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
             </select>
           </td>
-          <td (mouseenter)="getAllTutor()" (mouseleave)="getAllTutor()">
+          <td>
             <select multiple class="form-control select2 select2-primary tutor"
                     data-dropdown-css-class="select2-primary" style="width: 100%">
               <option [ngValue]="null" disabled>Tutor</option>
-              <option *ngFor="let tutor of listTutor; index as j" [value]="tutor.id"
+              <option *ngFor="let tutor of classes.tutorSelect; index as j" [value]="tutor.id"
                       [selected]="classes.tutors[j] != null ? classes.tutors[j].id == tutor.id : false">{{tutor.name}}</option>
             </select>
           </td>

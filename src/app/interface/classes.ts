@@ -9,4 +9,6 @@ export interface Classes {
   instructor?: any;
   tutors?: any[];
   students?: any[];
+  tutorSelect?: any[];
+  instructorSelect?: any[];
 }
