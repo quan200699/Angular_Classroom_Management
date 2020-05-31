@@ -2,6 +2,7 @@ export interface Classes {
   id?: number;
   name?: string;
   classTime?: string;
+  module?: string;
   program?: any;
   classroom?: any;
   coach?: any;
