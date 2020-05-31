@@ -272,10 +272,13 @@ export class ListClassComponent implements OnInit {
     this.id = id;
   }
 
-  deleteClass() {
+  deleteClass()  {
     this.classesService.deleteClasses(this.id).subscribe(() => {
       this.classesService.getAllClasses().subscribe(listClasses => {
         this.listClasses = listClasses;
+      })
+      $(function () {
+        $('#modal-delete').modal('hide');
       })
       $(function () {
         const Toast = Swal.mixin({
@@ -290,6 +293,9 @@ export class ListClassComponent implements OnInit {
         });
       });
     }, () => {
+      $(function () {
+        $('#modal-delete').modal('hide');
+      })
       $(function () {
         const Toast = Swal.mixin({
           toast: true,

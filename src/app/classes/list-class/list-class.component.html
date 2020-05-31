@@ -41,7 +41,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let classes of listClasses; index as i">
+        <tr *ngFor="let classes of listClasses; index as i" (mouseenter)="getClassId(classes.id)"
+            (mouseleave)="getClassId(classes.id)">
           <td>{{i + 1}}</td>
           <td>
             <a [routerLink]="['info',classes.id]">{{classes.name}}</a>
@@ -74,7 +75,7 @@
                       [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
             </select>
           </td>
-          <td (click)="getClassId(classes.id)">
+          <td>
             <select multiple class="form-control select2 select2-primary tutor"
                     data-dropdown-css-class="select2-primary" style="width: 100%">
               <option [ngValue]="null" disabled>Tutor</option>
