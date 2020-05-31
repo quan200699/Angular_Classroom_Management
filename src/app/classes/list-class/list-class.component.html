@@ -58,8 +58,8 @@
             </select>
           </td>
           <td>
-            <select #selectList class="custom-select"
-                    (change)="addInstructorToClass(classes.id, selectList.value)">
+            <select #selectList1 class="custom-select"
+                    (change)="addInstructorToClass(classes.id, selectList1.value)">
               <option [ngValue]="null" disabled>Instructor</option>
               <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
                       [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
