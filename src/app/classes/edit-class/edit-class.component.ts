@@ -7,6 +7,8 @@ import {Program} from "../../interface/program";
 import {ClassesService} from "../../service/classes/classes.service";
 import {Classes} from "../../interface/classes";
 import {Module} from "../../interface/module";
+import {Lecture} from "../../interface/lecture";
+import {Classroom} from "../../interface/classroom";
 
 declare var $: any;
 declare var Swal: any;
@@ -18,7 +20,15 @@ declare var Swal: any;
 })
 export class EditClassComponent implements OnInit {
   sub: Subscription;
-  currentClass: Classes;
+  name: string;
+  id: number;
+  currentClassTime: string;
+  currentProgram: Program;
+  currentModule: string;
+  currentInstructor: Lecture;
+  currentCoach: Lecture;
+  currentTutors: Lecture[] = [];
+  currentClassroom: Classroom;
   classForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     classTime: new FormControl(),
@@ -28,7 +38,6 @@ export class EditClassComponent implements OnInit {
   classTime: string[] = [];
   listProgram: Program[] = [];
   listModule: Module[] = [];
-  id: number;
 
   constructor(private activatedRoute: ActivatedRoute,
               private programService: ProgramService,
@@ -38,10 +47,9 @@ export class EditClassComponent implements OnInit {
   ngOnInit() {
     this.classTime = ["G", "H", "I", "K"];
     this.getAllProgram();
-    this.sub = this.activatedRoute.paramMap.subscribe(async (paramMap: ParamMap) => {
+    this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
-      this.currentClass = await this.getClassesInfo(this.id);
-      this.getAllModuleByProgram(this.currentClass.program)
+      this.getClassesInfo(this.id);
     });
   }
 
@@ -52,7 +60,18 @@ export class EditClassComponent implements OnInit {
   }
 
   getClassesInfo(id: number) {
-    return this.classesService.getClasses(id).toPromise();
+    this.classesService.getClasses(id).subscribe(classes => {
+      this.name = classes.name;
+      this.id = classes.id;
+      this.currentClassTime = classes.classTime;
+      this.currentProgram = classes.program
+      this.currentModule = classes.module;
+      this.currentTutors = classes.tutors;
+      this.currentCoach = classes.coach;
+      this.currentInstructor = classes.instructor;
+      this.currentClassroom = classes.classroom;
+      this.getAllModuleByProgram(this.currentProgram);
+    });
   }
 
   getAllModuleByProgram(program: Program) {
@@ -64,16 +83,16 @@ export class EditClassComponent implements OnInit {
   updateClass(id: number) {
     const classes: Classes = {
       id: this.classForm.value.id,
-      name: this.classForm.value.name === '' ? this.currentClass.name : this.classForm.value.name,
-      classTime: this.classForm.value.classTime == null ? this.currentClass.classTime : this.classForm.value.classTime,
+      name: this.classForm.value.name === '' ? this.name : this.classForm.value.name,
+      classTime: this.classForm.value.classTime == null ? this.currentClassTime : this.classForm.value.classTime,
       program: {
-        id: this.classForm.value.program == null ? this.currentClass.program.id : this.classForm.value.program
+        id: this.classForm.value.program == null ? this.currentProgram.id : this.classForm.value.program
       },
-      module: this.classForm.value.module == null ? this.currentClass.module : this.classForm.value.module,
-      classroom: this.currentClass.classroom,
-      instructor: this.currentClass.instructor,
-      coach: this.currentClass.coach,
-      tutors: this.currentClass.tutors
+      module: this.classForm.value.module == null ? this.currentModule : this.classForm.value.module,
+      classroom: this.currentClassroom,
+      instructor: this.currentInstructor,
+      coach: this.currentCoach,
+      tutors: this.currentTutors
     };
     this.classesService.updateClasses(id, classes).subscribe(() => {
       $(function () {

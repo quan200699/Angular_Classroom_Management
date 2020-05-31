@@ -32,6 +32,7 @@
           <th>Số HV</th>
           <th>Giờ học lý thuyết</th>
           <th>Chương trình học</th>
+          <th>Module</th>
           <th>Coach</th>
           <th>Instructor</th>
           <th>Tutor</th>
@@ -53,6 +54,9 @@
           </td>
           <td *ngIf="classes.program != null">
             {{classes.program.name}}
+          </td>
+          <td >
+            {{classes.module}}
           </td>
           <td>
             <select #coachId class="custom-select"
