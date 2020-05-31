@@ -145,6 +145,47 @@ export class ListClassComponent implements OnInit {
     }
   }
 
+
+  async addClassroomToClasses(classId: number, classroomId: string) {
+    const classes = await this.getClasses(classId);
+    const currentClass: Classes = {
+      id: classes.id,
+      name: classes.name,
+      classTime: classes.classTime,
+      program: {
+        id: classes.program.id
+      },
+      classroom: {
+        id: +classroomId
+      },
+      tutors: []
+    };
+    if (classes.coach != null) {
+      currentClass.coach = classes.coach;
+    }
+    if (classes.tutors != null) {
+      currentClass.tutors = classes.tutors;
+    }
+    if (classes.instructor != null) {
+      currentClass.instructor = classes.instructor;
+    }
+    // if (isEqual && count == 2) {
+    //   this.message = "Giảng viên này đã có 2 vai trong lớp này";
+    //   var self = this;
+    //   $(function () {
+    //     $('#modal-danger').modal('show');
+    //   })
+    //   $('#save-event').on('click', function () {
+    //       self.classesService.updateClasses(classId, currentClass).subscribe(() => {
+    //       });
+    //     }
+    //   );
+    // } else {
+    this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+    });
+    // }
+  }
+
   getClasses(id: number) {
     return this.classesService.getClasses(id).toPromise();
   }

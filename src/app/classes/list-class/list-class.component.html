@@ -75,10 +75,11 @@
             </select>
           </td>
           <td>
-            <select #classroomId class="custom-select">
+            <select #classroomId class="custom-select"
+                     (change)="addClassroomToClasses(classes.id, classroomId.value)">
               <option [ngValue]="null" disabled>Vị tri</option>
               <option *ngFor="let classroom of listClassroom" [value]="classroom.id"
-                      [selected]="classes.classroom != null ? classes.instructor.id === classroom.id : false">{{classroom.name}}</option>
+                      [selected]="classes.classroom != null ? classes.classroom.id === classroom.id : false">{{classroom.name}}</option>
             </select>
           </td>
           <td>
