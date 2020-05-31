@@ -42,6 +42,8 @@ export class ListClassComponent implements OnInit {
 
   addCoachToClass(classId: number, coachId: string) {
     this.classesService.getClasses(classId).subscribe(classes => {
+      let count = 1;
+      let isEqual = false;
       const currentClass: Classes = {
         id: classes.id,
         name: classes.name,
@@ -56,12 +58,33 @@ export class ListClassComponent implements OnInit {
       };
       if (classes.instructor != null) {
         currentClass.instructor = classes.instructor;
+        if (classes.instructor.id == +coachId) {
+          isEqual = true;
+        }
       }
       if (classes.tutors != null) {
         currentClass.tutors = classes.tutors;
+        classes.tutors.map(tutor => {
+          if (tutor.id == classes.instructor.id) {
+            count++;
+          }
+        })
       }
-      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
-      });
+      if (isEqual && count == 2) {
+        this.message = "Giảng viên này đã có 2 vai trong lớp này";
+        var self = this;
+        $(function () {
+          $('#modal-danger').modal('show');
+        })
+        $('#save-event').on('click', function () {
+            self.classesService.updateClasses(classId, currentClass).subscribe(() => {
+            });
+          }
+        );
+      } else {
+        this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+        });
+      }
     })
   }
 
