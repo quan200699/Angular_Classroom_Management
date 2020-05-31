@@ -21,6 +21,7 @@ export class ListClassComponent implements OnInit {
   listInstructor: Lecture[] = [];
   listTutor: Lecture[] = [];
   selected: boolean;
+  message = "";
 
   constructor(private classesService: ClassesService,
               private lectureService: LectureService) {
@@ -66,6 +67,8 @@ export class ListClassComponent implements OnInit {
 
   addInstructorToClass(classId: number, instructorId: string) {
     this.classesService.getClasses(classId).subscribe(classes => {
+      let count = 1;
+      let isEqual = false;
       const currentClass: Classes = {
         id: classes.id,
         name: classes.name,
@@ -80,12 +83,39 @@ export class ListClassComponent implements OnInit {
       };
       if (classes.coach != null) {
         currentClass.coach = classes.coach;
+        if (classes.coach.id == +instructorId) {
+          isEqual = true;
+        }
       }
       if (classes.tutors != null) {
         currentClass.tutors = classes.tutors;
+        classes.tutors.map(tutor => {
+          if (tutor.id == classes.coach.id) {
+            count++;
+          }
+        })
       }
-      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
-      });
+      if (isEqual && count == 2) {
+        this.message = "Giảng viên " + classes.coach.name + " đã có 2 vai trong lớp này";
+        var self = this;
+        $(function () {
+          $('#modal-danger').modal('show');
+        })
+        $('#save-event').on('click', function () {
+            self.classesService.updateClasses(classId, currentClass).subscribe(() => {
+            });
+          }
+        );
+      } else {
+        this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+        });
+      }
+    })
+  }
+
+  continue() {
+    $(function () {
+      $('#modal-danger').modal('hide');
     })
   }
 

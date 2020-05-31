@@ -114,4 +114,27 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
+  <div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+      <div class="modal-content bg-danger">
+        <div class="modal-header">
+          <h4 class="modal-title">Cảnh báo</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{message}}</p>
+          <p>Bạn có chắc muốn tiếp tục?</p>
+          <p>Nếu có hãy nhấn OK</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-outline-light" id="save-event" (click)="continue()">OK</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 </section>
