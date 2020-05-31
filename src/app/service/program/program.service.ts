@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Program} from "../../interface/program";
+import {Module} from "../../interface/module";
 
 const API_URL = `${environment.apiUrl}`
 
@@ -32,5 +33,9 @@ export class ProgramService {
 
   deleteProgram(id: number): Observable<Program> {
     return this.http.delete<Program>(API_URL + `/programs/${id}`);
+  }
+
+  getAllModuleByProgram(id: number): Observable<Module[]> {
+    return this.http.get<Module[]>(API_URL + `/programs/${id}/modules`);
   }
 }
