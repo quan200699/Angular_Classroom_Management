@@ -6,6 +6,7 @@ import {ProgramService} from "../../service/program/program.service";
 import {Program} from "../../interface/program";
 import {ClassesService} from "../../service/classes/classes.service";
 import {Classes} from "../../interface/classes";
+import {Module} from "../../interface/module";
 
 declare var $: any;
 declare var Swal: any;
@@ -17,31 +18,31 @@ declare var Swal: any;
 })
 export class EditClassComponent implements OnInit {
   sub: Subscription;
-  name: string;
-  id: number;
-  currentClassTime: string;
-  currentProgram: Program;
+  currentClass: Classes;
   classForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     classTime: new FormControl(),
-    program: new FormControl()
+    program: new FormControl(),
+    module: new FormControl()
   });
   classTime: string[] = [];
-  listProgram: Program[];
-
+  listProgram: Program[] = [];
+  listModule: Module[] = [];
+  id: number;
 
   constructor(private activatedRoute: ActivatedRoute,
               private programService: ProgramService,
               private classesService: ClassesService) {
-    this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      const id = +paramMap.get('id');
-      this.getClassesInfo(id);
-    });
   }
 
   ngOnInit() {
     this.classTime = ["G", "H", "I", "K"];
     this.getAllProgram();
+    this.sub = this.activatedRoute.paramMap.subscribe(async (paramMap: ParamMap) => {
+      this.id = +paramMap.get('id');
+      this.currentClass = await this.getClassesInfo(this.id);
+      this.getAllModuleByProgram(this.currentClass.program)
+    });
   }
 
   getAllProgram() {
@@ -51,22 +52,28 @@ export class EditClassComponent implements OnInit {
   }
 
   getClassesInfo(id: number) {
-    this.classesService.getClasses(id).subscribe(classes => {
-      this.name = classes.name;
-      this.id = classes.id;
-      this.currentClassTime = classes.classTime;
-      this.currentProgram = classes.program
-    });
+    return this.classesService.getClasses(id).toPromise();
+  }
+
+  getAllModuleByProgram(program: Program) {
+    this.programService.getAllModuleByProgram(program.id).subscribe(listModule => {
+      this.listModule = listModule;
+    })
   }
 
   updateClass(id: number) {
     const classes: Classes = {
       id: this.classForm.value.id,
-      name: this.classForm.value.name === '' ? this.name : this.classForm.value.name,
-      classTime: this.classForm.value.classTime == null ? this.currentClassTime : this.classForm.value.classTime,
+      name: this.classForm.value.name === '' ? this.currentClass.name : this.classForm.value.name,
+      classTime: this.classForm.value.classTime == null ? this.currentClass.classTime : this.classForm.value.classTime,
       program: {
-        id: this.classForm.value.program == null ? this.currentProgram.id : this.classForm.value.program
+        id: this.classForm.value.program == null ? this.currentClass.program.id : this.classForm.value.program
       },
+      module: this.classForm.value.module == null ? this.currentClass.module : this.classForm.value.module,
+      classroom: this.currentClass.classroom,
+      instructor: this.currentClass.instructor,
+      coach: this.currentClass.coach,
+      tutors: this.currentClass.tutors
     };
     this.classesService.updateClasses(id, classes).subscribe(() => {
       $(function () {
