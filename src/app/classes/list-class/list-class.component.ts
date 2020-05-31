@@ -65,22 +65,20 @@ export class ListClassComponent implements OnInit {
       coach: {
         id: +coachId
       },
-      tutors: []
+      tutors: classes.tutors != null ? classes.tutors : [],
+      instructor: classes.instructor != null ? classes.instructor : null,
+      classroom: classes.classroom != null ? classes.classroom : null
     };
     if (classes.instructor != null) {
-      currentClass.instructor = classes.instructor;
       if (classes.instructor.id == +coachId) {
         isEqual = true;
       }
     }
-    if (classes.tutors != null) {
-      currentClass.tutors = classes.tutors;
-      classes.tutors.map(tutor => {
-        if (tutor.id == classes.instructor.id) {
-          count++;
-        }
-      })
-    }
+    classes.tutors.map(tutor => {
+      if (tutor.id == classes.instructor.id) {
+        count++;
+      }
+    })
     if (isEqual && count == 2) {
       this.message = "Giảng viên này đã có 2 vai trong lớp này";
       var self = this;
@@ -112,22 +110,20 @@ export class ListClassComponent implements OnInit {
       instructor: {
         id: +instructorId
       },
-      tutors: []
+      tutors: classes.tutors != null ? classes.tutors : [],
+      coach: classes.coach != null ? classes.coach : null,
+      classroom: classes.classroom != null ? classes.classroom : null
     };
     if (classes.coach != null) {
-      currentClass.coach = classes.coach;
       if (classes.coach.id == +instructorId) {
         isEqual = true;
       }
     }
-    if (classes.tutors != null) {
-      currentClass.tutors = classes.tutors;
-      classes.tutors.map(tutor => {
-        if (tutor.id == classes.coach.id) {
-          count++;
-        }
-      })
-    }
+    classes.tutors.map(tutor => {
+      if (tutor.id == classes.coach.id) {
+        count++;
+      }
+    })
     if (isEqual && count == 2) {
       this.message = "Giảng viên này đã có 2 vai trong lớp này";
       var self = this;
@@ -158,17 +154,10 @@ export class ListClassComponent implements OnInit {
       classroom: {
         id: +classroomId
       },
-      tutors: []
+      tutors: classes.tutors != null ? classes.tutors : [],
+      instructor: classes.instructor != null ? classes.instructor : null,
+      coach: classes.coach != null ? classes.coach : null,
     };
-    if (classes.coach != null) {
-      currentClass.coach = classes.coach;
-    }
-    if (classes.tutors != null) {
-      currentClass.tutors = classes.tutors;
-    }
-    if (classes.instructor != null) {
-      currentClass.instructor = classes.instructor;
-    }
     // if (isEqual && count == 2) {
     //   this.message = "Giảng viên này đã có 2 vai trong lớp này";
     //   var self = this;
@@ -205,17 +194,11 @@ export class ListClassComponent implements OnInit {
         program: {
           id: classes.program.id
         },
-        tutors: []
+        tutors: classes.tutors != null ? classes.tutors : [],
+        coach: classes.coach != null ? classes.coach : null,
+        instructor: classes.instructor != null ? classes.instructor : null,
+        classroom: classes.classroom != null ? classes.classroom : null
       };
-      if (classes.coach != null) {
-        currentClass.coach = classes.coach;
-      }
-      if (classes.instructor != null) {
-        currentClass.instructor = classes.instructor;
-      }
-      if (classes.tutors != null) {
-        currentClass.tutors = classes.tutors;
-      }
       if (tutorIds != null) {
         for (let i = 0; i < tutorIds.length; i++) {
           const tutor = await this.getLecture(tutorIds[i]);
