@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Classroom} from "../../interface/classroom";
+import {Classes} from "../../interface/classes";
 
 const API_URL = `${environment.apiUrl}`
 
@@ -16,6 +17,10 @@ export class ClassroomService {
 
   getAllClassroom(): Observable<Classroom[]> {
     return this.http.get<Classroom[]>(API_URL + '/classrooms');
+  }
+
+  getAllClassesByClassroom(id: number): Observable<Classes[]> {
+    return this.http.get<Classes[]>(API_URL + `/classrooms/${id}/classes`);
   }
 
   createClassroom(classroom: Classroom): Observable<Classroom> {

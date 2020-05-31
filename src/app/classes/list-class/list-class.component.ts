@@ -3,6 +3,8 @@ import {Classes} from "../../interface/classes";
 import {ClassesService} from "../../service/classes/classes.service";
 import {Lecture} from "../../interface/lecture";
 import {LectureService} from "../../service/lecture/lecture.service";
+import {Classroom} from "../../interface/classroom";
+import {ClassroomService} from "../../service/classroom/classroom.service";
 
 declare var $: any;
 declare var Swal: any;
@@ -20,11 +22,13 @@ export class ListClassComponent implements OnInit {
   listCoach: Lecture[] = [];
   listInstructor: Lecture[] = [];
   listTutor: Lecture[] = [];
+  listClassroom: Classroom[] = [];
   selected: boolean;
   message = "";
 
   constructor(private classesService: ClassesService,
-              private lectureService: LectureService) {
+              private lectureService: LectureService,
+              private classroomService: ClassroomService) {
   }
 
   ngOnInit() {
@@ -32,6 +36,13 @@ export class ListClassComponent implements OnInit {
     this.getAllCoach();
     this.getAllInstructor();
     this.getAllTutor();
+    this.getAllClassroom();
+  }
+
+  getAllClassroom() {
+    this.classroomService.getAllClassroom().subscribe(listClassroom => {
+      this.listClassroom = listClassroom;
+    })
   }
 
   getAllCoach() {
