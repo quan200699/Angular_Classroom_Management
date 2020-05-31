@@ -36,6 +36,6 @@ export class ClassesService {
   }
 
   getAllStudentByClass(id: number): Observable<Student[]> {
-    return this.http.get<Student[]>(API_URL + `classes/${id}/students`);
+    return this.http.get<Student[]>(API_URL + `/classes/${id}/students`);
   }
 }

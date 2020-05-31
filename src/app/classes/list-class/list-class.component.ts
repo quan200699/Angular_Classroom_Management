@@ -143,6 +143,7 @@ export class ListClassComponent implements OnInit {
 
 
   async addClassroomToClasses(classId: number, classroomId: string) {
+    let capacity = 0;
     const classes = await this.getClasses(classId);
     const currentClass: Classes = {
       id: classes.id,
@@ -157,22 +158,33 @@ export class ListClassComponent implements OnInit {
       tutors: classes.tutors != null ? classes.tutors : [],
       instructor: classes.instructor != null ? classes.instructor : null,
       coach: classes.coach != null ? classes.coach : null,
+      students: []
     };
-    // if (isEqual && count == 2) {
-    //   this.message = "Giảng viên này đã có 2 vai trong lớp này";
-    //   var self = this;
-    //   $(function () {
-    //     $('#modal-danger').modal('show');
-    //   })
-    //   $('#save-event').on('click', function () {
-    //       self.classesService.updateClasses(classId, currentClass).subscribe(() => {
-    //       });
-    //     }
-    //   );
-    // } else {
-    this.classesService.updateClasses(classId, currentClass).subscribe(() => {
-    });
-    // }
+    const classroom = await this.getClassroom(+classroomId);
+    const listClass = await this.classroomService.getAllClassesByClassroom(+classroomId).toPromise();
+    if (listClass.length == 0) {
+      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+      });
+    } else {
+      listClass.map(async class1 => {
+        class1.students = await this.getAllStudentByClasses(class1);
+        capacity += class1.students.length;
+      })
+      classes.students = await this.getAllStudentByClasses(classes);
+      if (capacity + classes.students.length > classroom.capacity) {
+        this.message = "Phòng học này không đủ chỗ cho lớp";
+        $(function () {
+          $('#modal-danger').modal('show');
+        })
+        $('#save-event').on('click', function () {
+            $('#modal-danger').modal('hide');
+          }
+        );
+      } else {
+        this.classesService.updateClasses(classId, currentClass).subscribe(() => {
+        });
+      }
+    }
   }
 
   getClasses(id: number) {
@@ -298,6 +310,9 @@ export class ListClassComponent implements OnInit {
     var self = this;
     this.classesService.getAllClasses().subscribe(listClasses => {
       this.listClasses = listClasses;
+      this.listClasses.map(async classes => {
+        classes.students = await this.getAllStudentByClasses(classes);
+      })
       $(function () {
         $('#table-classes').DataTable({
           "paging": true,
@@ -323,4 +338,11 @@ export class ListClassComponent implements OnInit {
     });
   }
 
+  getAllStudentByClasses(classes: Classes) {
+    return this.classesService.getAllStudentByClass(classes.id).toPromise()
+  }
+
+  getClassroom(id: number) {
+    return this.classroomService.getClassroom(id).toPromise();
+  }
 }
