@@ -20,7 +20,6 @@ export class ListClassComponent implements OnInit {
   listClasses: Classes[];
   id: number;
   listCoach: Lecture[] = [];
-  listInstructor: Lecture[] = [];
   listClassroom: Classroom[] = [];
   selected: boolean;
   message = "";
@@ -32,7 +31,6 @@ export class ListClassComponent implements OnInit {
 
   ngOnInit() {
     this.getAllClasses();
-    this.getAllCoach();
     this.getAllClassroom();
   }
 
@@ -352,6 +350,7 @@ export class ListClassComponent implements OnInit {
         classes.tutorSelect = await this.getAllTutor(classes.id);
         classes.instructorSelect = await this.getAllInstructor(classes.id);
       })
+      this.getAllCoach();
       $(function () {
         $('#table-classes').DataTable({
           "paging": true,
