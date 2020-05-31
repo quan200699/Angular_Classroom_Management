@@ -50,16 +50,16 @@
             {{classes.program.name}}
           </td>
           <td>
-            <select #selectList class="custom-select"
-                    (change)="addCoachToClass(classes.id, selectList.value)">
+            <select #coachId class="custom-select"
+                    (change)="addCoachToClass(classes.id, coachId.value)">
               <option [ngValue]="null" disabled>Coach</option>
               <option *ngFor="let coach of listCoach" [value]="coach.id"
                       [selected]="classes.coach!=null ? classes.coach.id === coach.id : false">{{coach.name}}</option>
             </select>
           </td>
           <td>
-            <select #selectList1 class="custom-select"
-                    (change)="addInstructorToClass(classes.id, selectList1.value)">
+            <select #instructorId class="custom-select"
+                    (change)="addInstructorToClass(classes.id, instructorId.value)">
               <option [ngValue]="null" disabled>Instructor</option>
               <option *ngFor="let instructor of listInstructor" [value]="instructor.id"
                       [selected]="classes.instructor != null ? classes.instructor.id === instructor.id : false">{{instructor.name}}</option>
