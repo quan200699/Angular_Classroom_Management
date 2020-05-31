@@ -79,6 +79,7 @@ export class CreateClassComponent implements OnInit {
       id: this.classForm.value.id,
       name: this.classForm.value.name,
       classTime: this.classForm.value.classTime,
+      module: 'Module 1',
       program: {
         id: this.classForm.value.program
       },
