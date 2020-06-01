@@ -23,6 +23,8 @@ export class ListClassComponent implements OnInit {
   listClassroom: Classroom[] = [];
   selected: boolean;
   message = "";
+  isClassroomError = false;
+  isLectureError = false;
 
   constructor(private classesService: ClassesService,
               private lectureService: LectureService,
@@ -77,6 +79,7 @@ export class ListClassComponent implements OnInit {
     })
     if (isEqual && count == 2) {
       this.message = "Giảng viên này đã có 2 vai trong lớp này";
+      this.isLectureError = true;
       var self = this;
       $(function () {
         $('#modal-danger').modal('show');
@@ -123,6 +126,7 @@ export class ListClassComponent implements OnInit {
     })
     if (isEqual && count == 2) {
       this.message = "Giảng viên này đã có 2 vai trong lớp này";
+      this.isLectureError = true;
       var self = this;
       $(function () {
         $('#modal-danger').modal('show');
@@ -170,6 +174,7 @@ export class ListClassComponent implements OnInit {
       })
       classes.students = await this.getAllStudentByClasses(classes);
       if (capacity + classes.students.length > classroom.capacity) {
+        this.isClassroomError = true;
         this.message = "Phòng học này không đủ chỗ cho lớp";
         $(function () {
           $('#modal-danger').modal('show');
