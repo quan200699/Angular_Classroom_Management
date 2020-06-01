@@ -3,4 +3,6 @@ export interface Lecture {
   name?: string;
   job?: any;
   languages?: any[];
+  classInstructor?: any[];
+  classCoach?: any[];
 }

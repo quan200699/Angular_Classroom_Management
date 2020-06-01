@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Bảng phân công</h1>
+        <h1>Bảng phân công Coach và Instructor</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -39,29 +39,39 @@
         </tr>
         </thead>
         <tbody>
-<!--        <tr *ngFor="let classroom of listClassroom; index as i">-->
-<!--          <td>-->
-<!--            <a [routerLink]="['info',classroom.id]">{{classroom.name}}</a>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            {{classroom.capacity}}-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <div class="row">-->
-<!--              <div class="col-6">-->
-<!--                <a [routerLink]="['edit',classroom.id]" class="btn btn-block btn-primary" style="color: white">-->
-<!--                  <i class="fa fa-edit"></i>-->
-<!--                </a>-->
-<!--              </div>-->
-<!--              <div class="col-6">-->
-<!--                <button type="button" class="btn btn-block btn-danger" style="color: white" data-toggle="modal"-->
-<!--                        data-target="#modal-delete" (click)="getClassroomId(classroom.id)">-->
-<!--                  <i class="fas fa-trash"></i>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </td>-->
-<!--        </tr>-->
+        <tr *ngFor="let lecture of listLecture; index as i">
+          <td>{{lecture.name}}</td>
+          <td>{{lecture.classCoach[0] != null ? lecture.classCoach[0].name : ''}}</td>
+          <td>{{lecture.classCoach[1] != null ? lecture.classCoach[1].name : ''}}</td>
+          <td>
+            <span *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'G' ? classes.name: ''}}</span>
+          </td>
+          <td>
+            <span *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'H' ? classes.name: ''}}</span>
+          </td>
+          <td>
+            <span *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'I' ? classes.name: ''}}</span>
+          </td>
+          <td>
+            <span *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'K' ? classes.name: ''}}</span>
+          </td>
+          <!--          <td-->
+          <!--            *ngIf="lecture.classInstructor != null">{{lecture.classInstructor[0] != null ? (lecture.classInstructor[0].classTime == 'G' ? lecture.classInstructor[0].name : '') : ''}}-->
+          <!--          </td>-->
+          <!--          <td *ngIf="lecture.classInstructor == null"></td>-->
+          <!--          <td-->
+          <!--            *ngIf="lecture.classInstructor != null">{{lecture.classInstructor[1] != null ? (lecture.classInstructor[1].classTime == 'H' ? lecture.classInstructor[1].name : '') : ''}}-->
+          <!--          </td>-->
+          <!--          <td *ngIf="lecture.classInstructor == null"></td>-->
+          <!--          <td-->
+          <!--            *ngIf="lecture.classInstructor != null">{{lecture.classInstructor[2] != null ? (lecture.classInstructor[2].classTime == 'I' ? lecture.classInstructor[2].name : '') : ''}}-->
+          <!--          </td>-->
+          <!--          <td *ngIf="lecture.classInstructor == null"></td>-->
+          <!--          <td-->
+          <!--            *ngIf="lecture.classInstructor != null">{{lecture.classInstructor[3] != null ? (lecture.classInstructor[3].classTime == 'K' ? lecture.classInstructor[3].name : '') : ''}}-->
+          <!--          </td>-->
+          <!--          <td *ngIf="lecture.classInstructor == null"></td>-->
+        </tr>
         </tbody>
       </table>
     </div>

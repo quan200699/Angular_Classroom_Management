@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Lecture} from "../../interface/lecture";
+import {Classes} from "../../interface/classes";
 
 const API_URL = `${environment.apiUrl}`
 
@@ -39,5 +40,13 @@ export class LectureService {
 
   findAllByLanguage(id: number): Observable<Lecture[]> {
     return this.http.get<Lecture[]>(API_URL + `/languages/${id}/lectures`);
+  }
+
+  findAllClassesByInstructor(id: number): Observable<Classes[]> {
+    return this.http.get<Classes[]>(API_URL + `/lectures/${id}/instructor/classes`);
+  }
+
+  findAllClassesByCoach(id: number): Observable<Classes[]> {
+    return this.http.get<Classes[]>(API_URL + `/lectures/${id}/coach/classes`);
   }
 }
