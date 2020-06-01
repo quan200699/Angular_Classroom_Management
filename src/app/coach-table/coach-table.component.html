@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="card-body">
-      <table class="table table-bordered" id="table-classroom">
+      <table class="table table-bordered">
         <thead>
         <tr>
           <th></th>
@@ -34,8 +34,8 @@
         </tr>
         <tr>
           <th></th>
-          <th>Slack sáng</th>
-          <th>Slack chiều</th>
+          <th></th>
+          <th></th>
           <th>G</th>
           <th>H</th>
           <th>I</th>
@@ -60,6 +60,43 @@
             <span *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'K' ? classes.name: ''}}</span>
           </td>
         </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        Bảng phân công Tutor
+      </h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Phòng</th>
+          <th></th>
+          <th>Thứ 2</th>
+          <th>Thứ 3</th>
+          <th>Thứ 4</th>
+          <th>Thứ 5</th>
+          <th>Thứ 6</th>
+          <th>Tổng số chỗ</th>
+          <th>Số chỗ đang học</th>
+          <th>Số chỗ còn lại</th>
+          <th>Công suất</th>
+          <th>Lớp</th>
+          <th>Sĩ số của lớp</th>
+        </tr>
+        </thead>
+        <tbody>
         </tbody>
       </table>
     </div>
