@@ -153,7 +153,8 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-outline-light" data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn btn-outline-light" id="save-event" (click)="continue()">OK</button>
+          <button type="button" class="btn btn-outline-light" id="save-event" *ngIf="isLectureError" (click)="continue()">OK</button>
+          <button type="button" class="btn btn-outline-light" id="save-event1" *ngIf="!isLectureError" (click)="continue()">OK</button>
         </div>
       </div>
       <!-- /.modal-content -->

@@ -48,51 +48,71 @@ export class ListClassComponent implements OnInit {
     })
   }
 
-  async addCoachToClass(classId: number, coachId: string) {
-    const classes = await this.getClasses(classId);
-    let count = 1;
-    let isEqual = false;
-    const currentClass: Classes = {
-      id: classes.id,
-      name: classes.name,
-      classTime: classes.classTime,
-      module: classes.module,
-      program: {
-        id: classes.program.id
-      },
-      coach: {
-        id: +coachId
-      },
-      tutors: classes.tutors != null ? classes.tutors : [],
-      instructor: classes.instructor != null ? classes.instructor : null,
-      classroom: classes.classroom != null ? classes.classroom : null
-    };
-    if (classes.instructor != null) {
-      if (classes.instructor.id == +coachId) {
-        isEqual = true;
+  addCoachToClass(classId: number, coachId: string) {
+    this.classesService.getAllClasses().subscribe(async listClasses => {
+      let countCoach = 0;
+      for (let classes of listClasses) {
+        if (classes.coach != null) {
+          if (+coachId == classes.coach.id) {
+            countCoach++;
+          }
+        }
       }
-    }
-    classes.tutors.map(tutor => {
-      if (tutor.id == classes.instructor.id) {
-        count++;
-      }
-    })
-    if (isEqual && count == 2) {
-      this.message = "Giảng viên này đã có 2 vai trong lớp này";
-      this.isLectureError = true;
-      var self = this;
-      $(function () {
-        $('#modal-danger').modal('show');
-      })
-      $('#save-event').on('click', function () {
-          self.classesService.updateClasses(classId, currentClass).subscribe(() => {
+      if (countCoach == 2) {
+        this.message = "Giảng viên này đã có 2 coach 2 lớp";
+        this.isLectureError = true;
+        $(function () {
+          $('#modal-danger').modal('show');
+        })
+      } else {
+        const classes = await this.getClasses(classId);
+        let count = 1;
+        let isEqual = false;
+        const currentClass: Classes = {
+          id: classes.id,
+          name: classes.name,
+          classTime: classes.classTime,
+          module: classes.module,
+          program: {
+            id: classes.program.id
+          },
+          coach: {
+            id: +coachId
+          },
+          tutors: classes.tutors != null ? classes.tutors : [],
+          instructor: classes.instructor != null ? classes.instructor : null,
+          classroom: classes.classroom != null ? classes.classroom : null
+        };
+        if (classes.instructor != null) {
+          if (classes.instructor.id == +coachId) {
+            isEqual = true;
+          }
+          if (classes.tutors != null) {
+            classes.tutors.map(tutor => {
+              if (tutor.id == classes.instructor.id) {
+                count++;
+              }
+            })
+          }
+        }
+        if (isEqual && count == 2) {
+          this.message = "Giảng viên này đã có 2 vai trong lớp này";
+          this.isLectureError = true;
+          var self = this;
+          $(function () {
+            $('#modal-danger').modal('show');
+          })
+          $('#save-event').on('click', function () {
+              self.classesService.updateClasses(classId, currentClass).subscribe(() => {
+              });
+            }
+          );
+        } else {
+          this.classesService.updateClasses(classId, currentClass).subscribe(() => {
           });
         }
-      );
-    } else {
-      this.classesService.updateClasses(classId, currentClass).subscribe(() => {
-      });
-    }
+      }
+    })
   }
 
   async addInstructorToClass(classId: number, instructorId: string) {
@@ -141,7 +161,6 @@ export class ListClassComponent implements OnInit {
       });
     }
   }
-
 
   async addClassroomToClasses(classId: number, classroomId: string) {
     let capacity = 0;
