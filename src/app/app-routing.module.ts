@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {CoachTableComponent} from "./coach-table/coach-table.component";
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'classes',
     loadChildren: () => import('./classes/classes.module').then(module => module.ClassesModule)
+  },
+  {
+    path: 'coach-instructor',
+    component: CoachTableComponent
   }
 ];
 

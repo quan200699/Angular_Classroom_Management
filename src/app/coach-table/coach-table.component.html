@@ -1,0 +1,69 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Bảng phân công</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Bảng phân công</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"></h3>
+      <div class="card-tools">
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered" id="table-classroom">
+        <thead>
+        <tr>
+          <th></th>
+          <th colspan="2">Coach</th>
+          <th colspan="4">Instructor</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Slack sáng</th>
+          <th>Slack chiều</th>
+          <th>G</th>
+          <th>H</th>
+          <th>I</th>
+          <th>K</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr *ngFor="let classroom of listClassroom; index as i">-->
+<!--          <td>-->
+<!--            <a [routerLink]="['info',classroom.id]">{{classroom.name}}</a>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            {{classroom.capacity}}-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <div class="row">-->
+<!--              <div class="col-6">-->
+<!--                <a [routerLink]="['edit',classroom.id]" class="btn btn-block btn-primary" style="color: white">-->
+<!--                  <i class="fa fa-edit"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <button type="button" class="btn btn-block btn-danger" style="color: white" data-toggle="modal"-->
+<!--                        data-target="#modal-delete" (click)="getClassroomId(classroom.id)">-->
+<!--                  <i class="fas fa-trash"></i>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </td>-->
+<!--        </tr>-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
