@@ -141,7 +141,8 @@
           <td rowspan="4">{{classroom.efficiency}}%</td>
           <td *ngIf="classroom.classes[0]!=null">{{classroom.classes[0].name}}</td>
           <td *ngIf="classroom.classes[0]==null"></td>
-          <td></td>
+          <td *ngIf="classroom.classes[0]!=null">{{classroom.classes[0].students.length}}</td>
+          <td *ngIf="classroom.classes[0]==null"></td>
         </tr>
         <tr>
           <td>H</td>
@@ -173,7 +174,8 @@
           <td *ngIf="classroom.tutorInH== null"></td>
           <td *ngIf="classroom.classes[1]!=null">{{classroom.classes[1].name}}</td>
           <td *ngIf="classroom.classes[1]==null"></td>
-          <td></td>
+          <td *ngIf="classroom.classes[1]!=null">{{classroom.classes[1].students.length}}</td>
+          <td *ngIf="classroom.classes[1]==null"></td>
         </tr>
         <tr>
           <td>I</td>
@@ -204,7 +206,8 @@
           <td *ngIf="classroom.tutorInI== null">
           <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].name}}</td>
           <td *ngIf="classroom.classes[2]==null"></td>
-          <td></td>
+          <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].students.length}}</td>
+          <td *ngIf="classroom.classes[2]==null"></td>
         </tr>
         <tr>
           <td>K</td>
@@ -235,7 +238,8 @@
           <td *ngIf="classroom.tutorInK== null">
           <td *ngIf="classroom.classes[3]!=null">{{classroom.classes[3].name}}</td>
           <td *ngIf="classroom.classes[3]==null"></td>
-          <td></td>
+          <td *ngIf="classroom.classes[3]!=null">{{classroom.classes[3].students.length}}</td>
+          <td *ngIf="classroom.classes[3]==null"></td>
         </tr>
         </tbody>
       </table>

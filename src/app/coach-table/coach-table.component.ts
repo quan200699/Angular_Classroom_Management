@@ -42,6 +42,7 @@ export class CoachTableComponent implements OnInit {
           this.listClassroom[i].tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H');
           this.listClassroom[i].tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I');
           this.listClassroom[i].tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K');
+          this.listClassroom[i].classes[k].students = numberOfStudentInClass;
         }
         let efficiency = numberOfStudent / this.listClassroom[i].capacity;
         this.listClassroom[i].efficiency = Math.round(efficiency * 100)
