@@ -33,16 +33,36 @@ export class CoachTableComponent implements OnInit {
       this.listClassroom = listClassroom;
       for (let i = 0; i < this.listClassroom.length; i++) {
         this.listClassroom[i].classes = await this.getAllClassByClassroom(this.listClassroom[i]);
+        this.listClassroom[i].tutorInG = [];
+        this.listClassroom[i].tutorInH = [];
+        this.listClassroom[i].tutorInI = [];
+        this.listClassroom[i].tutorInK = [];
       }
       for (let i = 0; i < this.listClassroom.length; i++) {
         for (let k = 0; k < this.listClassroom[i].classes.length; k++) {
+          let tutorInG = [];
+          let tutorInH = [];
+          let tutorInI = [];
+          let tutorInK = [];
           const numberOfStudentInClass = await this.getAllStudentByClasses(this.listClassroom[i].classes[k]);
           numberOfStudent += numberOfStudentInClass.length;
-          this.listClassroom[i].tutorInG = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'G', 3);
-          this.listClassroom[i].tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H', 3);
-          this.listClassroom[i].tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I', 2);
-          this.listClassroom[i].tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K', 2);
+          tutorInG = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'G', 3);
+          tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H', 3);
+          tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I', 2);
+          tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K', 2);
           this.listClassroom[i].classes[k].students = numberOfStudentInClass;
+          if (tutorInG.length > this.listClassroom[i].tutorInG.length) {
+            this.listClassroom[i].tutorInG = tutorInG;
+          }
+          if (tutorInH.length > this.listClassroom[i].tutorInH.length) {
+            this.listClassroom[i].tutorInH = tutorInH;
+          }
+          if (tutorInI.length > this.listClassroom[i].tutorInI.length) {
+            this.listClassroom[i].tutorInI = tutorInI;
+          }
+          if (tutorInK.length > this.listClassroom[i].tutorInK.length) {
+            this.listClassroom[i].tutorInK = tutorInK;
+          }
         }
         let efficiency = numberOfStudent / this.listClassroom[i].capacity;
         this.listClassroom[i].efficiency = Math.round(efficiency * 100)
