@@ -38,10 +38,10 @@ export class CoachTableComponent implements OnInit {
         for (let k = 0; k < this.listClassroom[i].classes.length; k++) {
           const numberOfStudentInClass = await this.getAllStudentByClasses(this.listClassroom[i].classes[k]);
           numberOfStudent += numberOfStudentInClass.length;
-          this.listClassroom[i].tutorInG = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'G');
-          this.listClassroom[i].tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H');
-          this.listClassroom[i].tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I');
-          this.listClassroom[i].tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K');
+          this.listClassroom[i].tutorInG = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'G', 3);
+          this.listClassroom[i].tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H', 3);
+          this.listClassroom[i].tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I', 2);
+          this.listClassroom[i].tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K', 2);
           this.listClassroom[i].classes[k].students = numberOfStudentInClass;
         }
         let efficiency = numberOfStudent / this.listClassroom[i].capacity;
@@ -52,8 +52,8 @@ export class CoachTableComponent implements OnInit {
     })
   }
 
-  getAllTutorHasFreeTime(id: number, classTime: string) {
-    return this.classesService.getAllTutorHasFreeTime(id, classTime).toPromise();
+  getAllTutorHasFreeTime(id: number, classTime: string, jobId: number) {
+    return this.classesService.getAllTutorHasFreeTime(id, classTime, jobId).toPromise();
   }
 
   getAllLecture() {

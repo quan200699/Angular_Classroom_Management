@@ -44,7 +44,7 @@ export class ClassesService {
     return this.http.get<Lecture[]>(API_URL + `/classes/instructors?classTime=` + classTime);
   }
 
-  getAllTutorHasFreeTime(id: number, classTime: string): Observable<Lecture[]> {
-    return this.http.get<Lecture[]>(API_URL + `/classes/${id}/tutors?classTime=` + classTime);
+  getAllTutorHasFreeTime(id: number, classTime: string, jobId: number): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>(API_URL + `/classes/${id}/tutors?classTime=` + classTime + '&jobId=' + jobId);
   }
 }
