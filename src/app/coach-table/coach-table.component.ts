@@ -4,6 +4,7 @@ import {Lecture} from "../interface/lecture";
 import {Classroom} from "../interface/classroom";
 import {ClassroomService} from "../service/classroom/classroom.service";
 import {ClassesService} from "../service/classes/classes.service";
+import {Classes} from "../interface/classes";
 
 @Component({
   selector: 'app-coach-table',
@@ -28,17 +29,24 @@ export class CoachTableComponent implements OnInit {
 
   getAllClassroom() {
     this.classroomService.getAllClassroom().subscribe(async listClassroom => {
+      let numberOfStudent = 0;
       this.listClassroom = listClassroom;
       for (let i = 0; i < this.listClassroom.length; i++) {
         this.listClassroom[i].classes = await this.getAllClassByClassroom(this.listClassroom[i]);
       }
       for (let i = 0; i < this.listClassroom.length; i++) {
         for (let k = 0; k < this.listClassroom[i].classes.length; k++) {
+          const numberOfStudentInClass = await this.getAllStudentByClasses(this.listClassroom[i].classes[k]);
+          numberOfStudent += numberOfStudentInClass.length;
           this.listClassroom[i].tutorInG = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'G');
           this.listClassroom[i].tutorInH = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'H');
           this.listClassroom[i].tutorInI = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'I');
           this.listClassroom[i].tutorInK = await this.getAllTutorHasFreeTime(this.listClassroom[i].classes[k].id, 'K');
         }
+        let efficiency = numberOfStudent / this.listClassroom[i].capacity;
+        this.listClassroom[i].efficiency = Math.round(efficiency * 100)
+        this.listClassroom[i].students = numberOfStudent;
+        numberOfStudent = 0;
       }
     })
   }
@@ -55,6 +63,10 @@ export class CoachTableComponent implements OnInit {
         this.listLecture[i].classCoach = await this.getAllClassesByCoach(this.listLecture[i]);
       }
     })
+  }
+
+  getAllStudentByClasses(classes: Classes) {
+    return this.classesService.getAllStudentByClass(classes.id).toPromise();
   }
 
   getAllClassesByInstructor(lecture: Lecture) {

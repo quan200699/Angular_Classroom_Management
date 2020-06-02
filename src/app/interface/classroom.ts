@@ -7,4 +7,6 @@ export interface Classroom {
   tutorInH?: any[];
   tutorInI?: any[];
   tutorInK?: any[];
+  students?: number;
+  efficiency?: number;
 }
