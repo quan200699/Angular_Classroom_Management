@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-bordered text-center">
         <thead>
         <tr  style="background: #1002cc; color: white">
           <th></th>
@@ -44,7 +44,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let lecture of listLecture; index as i">
-          <td>{{lecture.name}}</td>
+          <td class="text-left">{{lecture.name}}</td>
           <td>{{lecture.classCoach[0] != null ? lecture.classCoach[0].name : ''}}</td>
           <td>{{lecture.classCoach[1] != null ? lecture.classCoach[1].name : ''}}</td>
           <td>
@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-bordered text-center">
         <thead>
         <tr style="background: #ff5cf5; color: white">
           <th></th>
@@ -103,33 +103,33 @@
         <tbody *ngFor="let classroom of listClassroom; index as i">
         <tr>
           <td rowspan="4">{{i + 1}}</td>
-          <td rowspan="4">{{classroom.name}}</td>
+          <td rowspan="4" class="text-left">{{classroom.name}}</td>
           <td>G</td>
-          <td *ngIf="classroom.tutorInG!= null">
+          <td *ngIf="classroom.tutorInG!= null" class="text-left">
             <span *ngIf="classroom.tutorInG[0]!=null">{{classroom.tutorInG[0].name}}</span>
             <span *ngIf="classroom.tutorInG[1]!=null">{{', ' + classroom.tutorInG[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInG== null">
           </td>
-          <td *ngIf="classroom.tutorInG!= null">
+          <td *ngIf="classroom.tutorInG!= null" class="text-left">
             <span *ngIf="classroom.tutorInG[0]!=null">{{classroom.tutorInG[0].name}}</span>
             <span *ngIf="classroom.tutorInG[1]!=null">{{', ' + classroom.tutorInG[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInG== null">
           </td>
-          <td *ngIf="classroom.tutorInG!= null">
+          <td *ngIf="classroom.tutorInG!= null" class="text-left">
             <span *ngIf="classroom.tutorInG[0]!=null">{{classroom.tutorInG[0].name}}</span>
             <span *ngIf="classroom.tutorInG[1]!=null">{{', ' + classroom.tutorInG[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInG== null">
           </td>
-          <td *ngIf="classroom.tutorInG!= null">
+          <td *ngIf="classroom.tutorInG!= null" class="text-left">
             <span *ngIf="classroom.tutorInG[0]!=null">{{classroom.tutorInG[0].name}}</span>
             <span *ngIf="classroom.tutorInG[1]!=null">{{', ' + classroom.tutorInG[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInG== null">
           </td>
-          <td *ngIf="classroom.tutorInG!= null">
+          <td *ngIf="classroom.tutorInG!= null" class="text-left">
             <span *ngIf="classroom.tutorInG[0]!=null">{{classroom.tutorInG[0].name}}</span>
             <span *ngIf="classroom.tutorInG[1]!=null">{{', ' + classroom.tutorInG[1].name}}</span>
           </td>
@@ -146,28 +146,28 @@
         </tr>
         <tr>
           <td>H</td>
-          <td *ngIf="classroom.tutorInH!= null">
+          <td *ngIf="classroom.tutorInH!= null" class="text-left">
             <span *ngIf="classroom.tutorInH[0]!=null">{{classroom.tutorInH[0].name}}</span>
             <span *ngIf="classroom.tutorInH[1]!=null">{{', ' + classroom.tutorInH[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInH== null">
           </td>
-          <td *ngIf="classroom.tutorInH!= null">
+          <td *ngIf="classroom.tutorInH!= null" class="text-left">
             <span *ngIf="classroom.tutorInH[0]!=null">{{classroom.tutorInH[0].name}}</span>
             <span *ngIf="classroom.tutorInH[1]!=null">{{', ' + classroom.tutorInH[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInH== null"></td>
-          <td *ngIf="classroom.tutorInH!= null">
+          <td *ngIf="classroom.tutorInH!= null" class="text-left">
             <span *ngIf="classroom.tutorInH[0]!=null">{{classroom.tutorInH[0].name}}</span>
             <span *ngIf="classroom.tutorInH[1]!=null">{{', ' + classroom.tutorInH[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInH== null"></td>
-          <td *ngIf="classroom.tutorInH!= null">
+          <td *ngIf="classroom.tutorInH!= null" class="text-left">
             <span *ngIf="classroom.tutorInH[0]!=null">{{classroom.tutorInH[0].name}}</span>
             <span *ngIf="classroom.tutorInH[1]!=null">{{', ' + classroom.tutorInH[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInH== null"></td>
-          <td *ngIf="classroom.tutorInH!= null">
+          <td *ngIf="classroom.tutorInH!= null" class="text-left">
             <span *ngIf="classroom.tutorInH[0]!=null">{{classroom.tutorInH[0].name}}</span>
             <span *ngIf="classroom.tutorInH[1]!=null">{{', ' + classroom.tutorInH[1].name}}</span>
           </td>
@@ -179,59 +179,59 @@
         </tr>
         <tr>
           <td>I</td>
-          <td *ngIf="classroom.tutorInI!= null">
+          <td *ngIf="classroom.tutorInI!= null" class="text-left">
             <span *ngIf="classroom.tutorInI[0]!=null">{{classroom.tutorInI[0].name}}</span>
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.tutorInI!= null">
+          <td *ngIf="classroom.tutorInI!= null" class="text-left">
             <span *ngIf="classroom.tutorInI[0]!=null">{{classroom.tutorInI[0].name}}</span>
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.tutorInI!= null">
+          <td *ngIf="classroom.tutorInI!= null" class="text-left">
             <span *ngIf="classroom.tutorInI[0]!=null">{{classroom.tutorInI[0].name}}</span>
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.tutorInI!= null">
+          <td *ngIf="classroom.tutorInI!= null" class="text-left">
             <span *ngIf="classroom.tutorInI[0]!=null">{{classroom.tutorInI[0].name}}</span>
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.tutorInI!= null">
+          <td *ngIf="classroom.tutorInI!= null" class="text-left">
             <span *ngIf="classroom.tutorInI[0]!=null">{{classroom.tutorInI[0].name}}</span>
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].name}}</td>
+          <td *ngIf="classroom.classes[2]!=null" >{{classroom.classes[2].name}}</td>
           <td *ngIf="classroom.classes[2]==null"></td>
           <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].students.length}}</td>
           <td *ngIf="classroom.classes[2]==null"></td>
         </tr>
         <tr>
           <td>K</td>
-          <td *ngIf="classroom.tutorInK!= null">
+          <td *ngIf="classroom.tutorInK!= null" class="text-left">
             <span *ngIf="classroom.tutorInK[0]!=null">{{classroom.tutorInK[0].name}}</span>
             <span *ngIf="classroom.tutorInK[1]!=null">{{', ' + classroom.tutorInK[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInK== null">
-          <td *ngIf="classroom.tutorInK!= null">
+          <td *ngIf="classroom.tutorInK!= null" class="text-left">
             <span *ngIf="classroom.tutorInK[0]!=null">{{classroom.tutorInK[0].name}}</span>
             <span *ngIf="classroom.tutorInK[1]!=null">{{', ' + classroom.tutorInK[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInK== null">
-          <td *ngIf="classroom.tutorInK!= null">
+          <td *ngIf="classroom.tutorInK!= null" class="text-left">
             <span *ngIf="classroom.tutorInK[0]!=null">{{classroom.tutorInK[0].name}}</span>
             <span *ngIf="classroom.tutorInK[1]!=null">{{', ' + classroom.tutorInK[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInK== null">
-          <td *ngIf="classroom.tutorInK!= null">
+          <td *ngIf="classroom.tutorInK!= null" class="text-left">
             <span *ngIf="classroom.tutorInK[0]!=null">{{classroom.tutorInK[0].name}}</span>
             <span *ngIf="classroom.tutorInK[1]!=null">{{', ' + classroom.tutorInK[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInK== null">
-          <td *ngIf="classroom.tutorInK!= null">
+          <td *ngIf="classroom.tutorInK!= null" class="text-left">
             <span *ngIf="classroom.tutorInK[0]!=null">{{classroom.tutorInK[0].name}}</span>
             <span *ngIf="classroom.tutorInK[1]!=null">{{', ' + classroom.tutorInK[1].name}}</span>
           </td>
