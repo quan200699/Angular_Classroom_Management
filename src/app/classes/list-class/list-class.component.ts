@@ -388,6 +388,7 @@ export class ListClassComponent implements OnInit {
           "autoWidth": false,
         });
         $('.select2').select2({
+          maximumSelectionLength: 2
         });
         $('.tutor').on('select2:select', function (e, source) {
           tutorIds = $(e.currentTarget).val();
