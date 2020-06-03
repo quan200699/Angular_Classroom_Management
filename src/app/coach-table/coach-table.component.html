@@ -27,7 +27,7 @@
     <div class="card-body">
       <table class="table table-bordered text-center">
         <thead>
-        <tr  style="background: #1002cc; color: white">
+        <tr style="background: #1002cc; color: white">
           <th></th>
           <th colspan="2">Coach</th>
           <th colspan="4">Instructor</th>
@@ -45,8 +45,8 @@
         <tbody>
         <tr *ngFor="let lecture of listLecture; index as i">
           <td class="text-left">{{lecture.name}}</td>
-          <td>{{lecture.classCoach[0] != null ? lecture.classCoach[0].name : ''}}</td>
-          <td>{{lecture.classCoach[1] != null ? lecture.classCoach[1].name : ''}}</td>
+          <td *ngIf="lecture.classCoach!=null">{{lecture.classCoach[0] != null ? lecture.classCoach[0].name : ''}}</td>
+          <td *ngIf="lecture.classCoach!=null">{{lecture.classCoach[1] != null ? lecture.classCoach[1].name : ''}}</td>
           <td>
             <span
               *ngFor="let classes of lecture.classInstructor">{{classes.classTime == 'G' ? classes.name : ''}}</span>
@@ -141,7 +141,8 @@
           <td rowspan="4">{{classroom.efficiency}}%</td>
           <td *ngIf="classroom.classes[0]!=null">{{classroom.classes[0].name}}</td>
           <td *ngIf="classroom.classes[0]==null"></td>
-          <td *ngIf="classroom.classes[0]!=null">{{classroom.classes[0].students.length}}</td>
+          <td
+            *ngIf="classroom.classes[0]!=null">{{classroom.classes[0].students != null && classroom.classes[0].students.length}}</td>
           <td *ngIf="classroom.classes[0]==null"></td>
         </tr>
         <tr>
@@ -174,7 +175,8 @@
           <td *ngIf="classroom.tutorInH== null"></td>
           <td *ngIf="classroom.classes[1]!=null">{{classroom.classes[1].name}}</td>
           <td *ngIf="classroom.classes[1]==null"></td>
-          <td *ngIf="classroom.classes[1]!=null">{{classroom.classes[1].students.length}}</td>
+          <td
+            *ngIf="classroom.classes[1]!=null">{{classroom.classes[1].students != null && classroom.classes[1].students.length}}</td>
           <td *ngIf="classroom.classes[1]==null"></td>
         </tr>
         <tr>
@@ -204,9 +206,10 @@
             <span *ngIf="classroom.tutorInI[1]!=null">{{', ' + classroom.tutorInI[1].name}}</span>
           </td>
           <td *ngIf="classroom.tutorInI== null">
-          <td *ngIf="classroom.classes[2]!=null" >{{classroom.classes[2].name}}</td>
+          <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].name}}</td>
           <td *ngIf="classroom.classes[2]==null"></td>
-          <td *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].students.length}}</td>
+          <td
+            *ngIf="classroom.classes[2]!=null">{{classroom.classes[2].students != null && classroom.classes[2].students.length}}</td>
           <td *ngIf="classroom.classes[2]==null"></td>
         </tr>
         <tr>
@@ -238,7 +241,8 @@
           <td *ngIf="classroom.tutorInK== null">
           <td *ngIf="classroom.classes[3]!=null">{{classroom.classes[3].name}}</td>
           <td *ngIf="classroom.classes[3]==null"></td>
-          <td *ngIf="classroom.classes[3]!=null">{{classroom.classes[3].students.length}}</td>
+          <td
+            *ngIf="classroom.classes[3]!=null">{{classroom.classes[3].students != null && classroom.classes[3].students.length}}</td>
           <td *ngIf="classroom.classes[3]==null"></td>
         </tr>
         </tbody>
