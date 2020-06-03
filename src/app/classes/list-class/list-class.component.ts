@@ -392,7 +392,7 @@ export class ListClassComponent implements OnInit {
           tutorIds = $(e.currentTarget).val();
         });
         $('.tutor').on('select2:unselecting', function (e, source) {
-          tutorIdRemove = $(e.currentTarget).val();
+          tutorIdRemove = e.params.args.data.id;
         });
         $('.tutor').on('change', function () {
           self.addTutorToClass(self.id);
