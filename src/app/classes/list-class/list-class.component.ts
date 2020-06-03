@@ -248,7 +248,7 @@ export class ListClassComponent implements OnInit {
           }
         }
         if (index != -1) {
-          this.removeTutorFromList(index, currentClass.tutors);
+          currentClass.tutors = this.removeTutorFromList(index, currentClass.tutors);
         }
       }
       this.classesService.updateClasses(classId, currentClass).subscribe(() => {
@@ -256,7 +256,7 @@ export class ListClassComponent implements OnInit {
     })
   }
 
-  removeTutorFromList(index: number, tutors: Lecture[]) {
+  removeTutorFromList(index: number, tutors: Lecture[]): Lecture[] {
     let listTutor = [];
     if (index == 0) {
       listTutor = tutors;
@@ -272,7 +272,7 @@ export class ListClassComponent implements OnInit {
         listTutor.push(tutors[i + 1]);
       }
     }
-    tutors = listTutor;
+    return listTutor;
   }
 
   async getAllInstructor(classId: number) {
@@ -388,7 +388,6 @@ export class ListClassComponent implements OnInit {
           "autoWidth": false,
         });
         $('.select2').select2({
-          maximumSelectionLength: 2
         });
         $('.tutor').on('select2:select', function (e, source) {
           tutorIds = $(e.currentTarget).val();

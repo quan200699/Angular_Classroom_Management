@@ -79,8 +79,7 @@
                     data-dropdown-css-class="select2-primary" style="width: 100%">
               <option [ngValue]="null" disabled>Tutor</option>
               <option *ngFor="let tutor of classes.tutorSelect; index as j" [value]="tutor.id"
-                      [selected]="classes.tutors[0] != null && classes.tutors[0].id == tutor.id
-                       || classes.tutors[1] != null && classes.tutors[1].id == tutor.id">{{tutor.name}}</option>
+                      [selected]="classes.tutors[j]">{{tutor.name}}</option>
             </select>
           </td>
           <td>
