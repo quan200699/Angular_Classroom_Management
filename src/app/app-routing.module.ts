@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'coach-instructor',
     component: CoachTableComponent
+  },
+  {
+    path: 'students',
+    loadChildren: () => import('./student/student.module').then(module => module.StudentModule)
   }
 ];
 

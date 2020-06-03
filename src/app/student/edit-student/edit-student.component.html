@@ -1,0 +1,55 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Cập nhật thông tin học viên</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Cập nhật thông tin</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title"></h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form [formGroup]="studentForm" (ngSubmit)="updateStudent(id)" id="student-form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="studentId">Mã học viên</label>
+        <input type="text" formControlName="studentId" name="studentId" [value]="studentId" class="form-control"
+               id="studentId"
+               placeholder="Mã học viên">
+      </div>
+      <div class="form-group">
+        <label for="name">Tên học viên</label>
+        <input type="text" formControlName="name" name="name" [value]="name" class="form-control" id="name"
+               placeholder="Tên học viên">
+      </div>
+      <div class="form-group" *ngIf="!buttonChangeClicked">
+        <label for="classes1">Lớp học: </label>
+        <span id="classes1" *ngIf="currentClass!=null">{{currentClass.name}}</span>
+        <button type="button" class="btn btn-primary btn-sm ml-3" (click)="changeButtonStatus()">Đổi lớp</button>
+      </div>
+      <div class="form-group" *ngIf="buttonChangeClicked">
+        <label for="classes">Lớp học: </label>
+        <select class="custom-select" id="classes" name="classes" formControlName="classes">
+          <option [ngValue]="null" disabled>Chọn lớp học</option>
+          <option *ngFor="let classes of listClasses" [value]="classes.id"
+                  [selected]="classes.id === currentClass.id">{{classes.name}}</option>
+        </select>
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </div>
+  </form>
+</div>

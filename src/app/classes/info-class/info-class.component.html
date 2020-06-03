@@ -30,6 +30,7 @@
           <th style="width: 10px">#</th>
           <th>Mã học viên</th>
           <th>Họ tên học viên</th>
+          <th style="width: 160px"></th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,21 @@
           <td>{{student.studentId}}</td>
           <td>
             {{student.name}}
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-6">
+                <a [routerLink]="['../../../students/edit',student.id]" class="btn btn-block btn-primary" style="color: white">
+                  <i class="fa fa-edit"></i>
+                </a>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-block btn-danger" style="color: white" data-toggle="modal"
+                        data-target="#modal-delete" >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
           </td>
         </tr>
         </tbody>
