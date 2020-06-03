@@ -67,7 +67,7 @@
             </select>
           </td>
           <td>
-            <select #instructorId class="custom-select" *ngIf="classes.instructor!=null"
+            <select #instructorId class="custom-select""
                     (change)="addInstructorToClass(classes.id, instructorId.value)">
               <option [ngValue]="null" disabled>Instructor</option>
               <option *ngFor="let instructor of classes.instructorSelect" [value]="instructor.id"
