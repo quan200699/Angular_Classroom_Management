@@ -373,7 +373,9 @@ export class ListClassComponent implements OnInit {
         classes.students = await this.getAllStudentByClasses(classes);
         classes.tutorSelect = await this.getAllTutor(classes.id);
         classes.instructorSelect = await this.getAllInstructor(classes.id);
-        classes.instructorSelect.push(classes.instructor);
+        if(classes.instructor!=null){
+          classes.instructorSelect.push(classes.instructor);
+        }
       })
       this.getAllCoach();
       $(function () {
