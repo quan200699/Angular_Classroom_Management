@@ -75,6 +75,20 @@ describe('JobService', () => {
       req.flush(job);
     })));
 
+  it('should PUT and return this object after updated', async(inject([HttpTestingController, JobService],
+    (httpClient: HttpTestingController, jobService: JobService) => {
+      const job = {
+        id: 1,
+        name: 'Part time'
+      };
+      jobService.updateJob(1, job).subscribe(newJob => {
+        expect(newJob).toEqual(job);
+      })
+      let req = httpMock.expectOne(API_URL + '/jobs/1');
+      expect(req.request.method).toEqual('PUT');
+      req.flush(job);
+    })))
+
   afterEach(() => {
     httpMock.verify();
   })
