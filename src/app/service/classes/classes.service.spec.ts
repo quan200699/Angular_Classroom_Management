@@ -3,7 +3,6 @@ import {async, inject, TestBed} from '@angular/core/testing';
 import {ClassesService} from './classes.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
-import {Classes} from "../../interface/classes";
 
 const API_URL = `${environment.apiUrl}`
 
