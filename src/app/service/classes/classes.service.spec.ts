@@ -105,10 +105,7 @@ describe('ClassesService', () => {
       });
       let req = httpMock.expectOne(API_URL + '/classes/3');
       expect(req.request.method).toBe('DELETE');
-    })))
-  afterEach(() => {
-    httpMock.verify();
-  })
+    })));
 
   it('should get and return list student in this class', async(inject([HttpTestingController, ClassesService],
     (httpClient: HttpTestingController, classesService: ClassesService) => {
@@ -141,5 +138,9 @@ describe('ClassesService', () => {
       let req = httpMock.expectOne(API_URL + '/classes/1/students');
       expect(req.request.method).toBe("GET");
     })))
+
+  afterEach(() => {
+    httpMock.verify();
+  })
 });
 
