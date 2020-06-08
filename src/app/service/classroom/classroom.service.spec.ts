@@ -48,7 +48,22 @@ describe('ClassroomService', () => {
       let req = httpMock.expectOne(API_URL + '/classrooms');
       expect(req.request.method).toBe("GET");
       req.flush(listClassroom);
-    })))
+    })));
+
+  it('should get and return this object', async(inject([HttpTestingController, ClassroomService],
+    (httpClient: HttpTestingController, classroomService: ClassroomService) => {
+      const classroom = {
+        id: 1,
+        name: "Tầng 3 TT01",
+        capacity: 49
+      }
+      classroomService.getClassroom(1).subscribe(currentClassroom => {
+        expect(currentClassroom).toEqual(classroom);
+      })
+      let req = httpMock.expectOne(API_URL + '/classrooms/1');
+      expect(req.request.method).toBe('GET');
+      req.flush(classroom);
+    })));
   afterEach(() => {
     httpMock.verify();
   })
