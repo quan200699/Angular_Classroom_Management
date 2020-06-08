@@ -3,6 +3,7 @@ import {async, inject, TestBed} from '@angular/core/testing';
 import {JobService} from './job.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
+import {Job} from "../../interface/job";
 
 const API_URL = `${environment.apiUrl}`;
 describe('JobService', () => {
@@ -87,6 +88,13 @@ describe('JobService', () => {
       let req = httpMock.expectOne(API_URL + '/jobs/1');
       expect(req.request.method).toEqual('PUT');
       req.flush(job);
+    })));
+
+  it('should DELETE', async(inject([HttpTestingController, JobService],
+    (httpClient: HttpTestingController, jobService: JobService) => {
+    jobService.deleteJob(3).subscribe();
+    let req = httpMock.expectOne(API_URL + '/jobs/3');
+    expect(req.request.method).toEqual('DELETE');
     })))
 
   afterEach(() => {
