@@ -109,5 +109,37 @@ describe('ClassesService', () => {
   afterEach(() => {
     httpMock.verify();
   })
+
+  it('should get and return list student in this class', async(inject([HttpTestingController, ClassesService],
+    (httpClient: HttpTestingController, classesService: ClassesService) => {
+      const students = [{
+        id: 1,
+        studentId: "001",
+        name: "Quân",
+        classes: {
+          id: 1
+        }
+      }, {
+        id: 2,
+        studentId: "002",
+        name: "Quân1",
+        classes: {
+          id: 2
+        }
+      }, {
+        id: 3,
+        studentId: "003",
+        name: "Quân2",
+        classes: {
+          id: 1
+        }
+      }];
+      classesService.getAllStudentByClass(1).subscribe(studentList => {
+        expect(studentList).toEqual(students);
+        expect(studentList.length).toEqual(2);
+      });
+      let req = httpMock.expectOne(API_URL + '/classes/1/students');
+      expect(req.request.method).toBe("GET");
+    })))
 });
 
