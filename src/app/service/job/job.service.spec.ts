@@ -3,7 +3,6 @@ import {async, inject, TestBed} from '@angular/core/testing';
 import {JobService} from './job.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
-import {Job} from "../../interface/job";
 
 const API_URL = `${environment.apiUrl}`;
 describe('JobService', () => {
