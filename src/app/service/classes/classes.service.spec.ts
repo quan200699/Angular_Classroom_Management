@@ -10,7 +10,6 @@ const API_URL = `${environment.apiUrl}`
 describe('ClassesService', () => {
   let classesService: ClassesService;
   let httpMock: HttpTestingController;
-  let listClasses: Classes[] = [];
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -29,7 +28,7 @@ describe('ClassesService', () => {
   });
   it(`should fetch classes as an Observable has length = 3`, async(inject([HttpTestingController, ClassesService],
     (httpClient: HttpTestingController, classesService1: ClassesService) => {
-      listClasses = [{
+      const listClasses = [{
         id: 1,
         name: "C0320H1",
         classTime: "H",
