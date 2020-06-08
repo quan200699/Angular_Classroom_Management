@@ -47,6 +47,20 @@ describe('JobService', () => {
       req.flush(listJob);
     })));
 
+  it('should GET and return this job', async(inject([HttpTestingController, JobService],
+    (httpClient: HttpTestingController, jobService: JobService) => {
+      const job = {
+        id: 3,
+        name: 'PART TIME 2'
+      };
+      jobService.getJob(3).subscribe(currentJob => {
+        expect(currentJob).toEqual(job);
+      });
+      let req = httpMock.expectOne(API_URL + '/jobs');
+      expect(req.request.method).toBe('GET');
+      req.flush(job);
+    })));
+
   afterEach(() => {
     httpMock.verify();
   })
