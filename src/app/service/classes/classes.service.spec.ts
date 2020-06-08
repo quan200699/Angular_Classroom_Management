@@ -98,7 +98,15 @@ describe('ClassesService', () => {
         expect(newClasses).toEqual(classes);
       })
       let req = httpMock.expectOne(API_URL + '/classes/3');
-      expect(req.request.method).toBe('PUT')
+      expect(req.request.method).toBe('PUT');
+    })))
+
+  it('should method delete', async(inject([HttpTestingController, ClassesService],
+    (httpClient: HttpTestingController, classesService: ClassesService) => {
+      classesService.deleteClasses(3).subscribe(() => {
+      });
+      let req = httpMock.expectOne(API_URL + '/classes/3');
+      expect(req.request.method).toBe('DELETE');
     })))
   afterEach(() => {
     httpMock.verify();
