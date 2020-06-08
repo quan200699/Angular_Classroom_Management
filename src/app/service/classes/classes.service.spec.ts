@@ -84,6 +84,21 @@ describe('ClassesService', () => {
       })
       let req = httpMock.expectOne(API_URL + '/classes');
       expect(req.request.method).toBe('POST');
+    })));
+
+  it('should put and return this data after update', async(inject([HttpTestingController, ClassesService],
+    (httpClient: HttpTestingController, classesService: ClassesService) => {
+      const classes = {
+        id: 3,
+        name: "C0520H1",
+        classTime: 'H',
+        module: 'module 2'
+      }
+      classesService.updateClasses(3, classes).subscribe(newClasses => {
+        expect(newClasses).toEqual(classes);
+      })
+      let req = httpMock.expectOne(API_URL + '/classes/3');
+      expect(req.request.method).toBe('PUT')
     })))
   afterEach(() => {
     httpMock.verify();
