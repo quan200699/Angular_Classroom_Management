@@ -54,20 +54,37 @@ describe('ClassesService', () => {
       expect(req.request.method).toBe("GET");
       req.flush(listClasses);
     })));
-  it('should return this object', async(inject([HttpTestingController, ClassesService],
+
+  it('should POST and return this object', async(inject([HttpTestingController, ClassesService],
     (httpClient: HttpTestingController, classesService: ClassesService) => {
-    const classDetail = {
-      id: 3,
-      name: "C1219G1",
-      classTime: "G",
-      module: "Module 5"
-    };
+      const classDetail = {
+        id: 3,
+        name: "C1219G1",
+        classTime: "G",
+        module: "Module 5"
+      };
       classesService.getClasses(3).subscribe(classes => {
         expect(classes).toEqual(classDetail)
       })
       let req = httpMock.expectOne(API_URL + `/classes/3`);
       expect(req.request.method).toBe("GET");
     })));
+
+
+  it('should post and return this data after create', async(inject([HttpTestingController, ClassesService],
+    (httpClient: HttpTestingController, classesService: ClassesService) => {
+      const classes = {
+        id: 4,
+        name: "C0220H1",
+        classTime: "H",
+        module: "Module 4"
+      }
+      classesService.createClasses(classes).subscribe(newClass => {
+        expect(newClass).toEqual(classes);
+      })
+      let req = httpMock.expectOne(API_URL + '/classes');
+      expect(req.request.method).toBe('POST');
+    })))
   afterEach(() => {
     httpMock.verify();
   })
