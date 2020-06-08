@@ -56,8 +56,22 @@ describe('JobService', () => {
       jobService.getJob(3).subscribe(currentJob => {
         expect(currentJob).toEqual(job);
       });
-      let req = httpMock.expectOne(API_URL + '/jobs');
+      let req = httpMock.expectOne(API_URL + '/jobs/3');
       expect(req.request.method).toBe('GET');
+      req.flush(job);
+    })));
+
+  it('should POST and return this job after created!', async(inject([HttpTestingController, JobService],
+    (httpClient: HttpTestingController, jobService: JobService) => {
+      const job = {
+        id: 1,
+        name: 'FULL TIME'
+      };
+      jobService.createJob(job).subscribe(newJob => {
+        expect(newJob).toEqual(job);
+      })
+      let req = httpMock.expectOne(API_URL + '/jobs');
+      expect(req.request.method).toBe('POST');
       req.flush(job);
     })));
 
