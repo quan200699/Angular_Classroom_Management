@@ -78,6 +78,21 @@ describe('ClassroomService', () => {
       let req = httpMock.expectOne(API_URL + '/classrooms');
       expect(req.request.method).toBe('POST');
       req.flush(classroom);
+    })));
+
+  it('should PUT and return this classroom after updated', async(inject([HttpTestingController, ClassroomService],
+    (httpClient: HttpTestingController, classroomService: ClassroomService) => {
+      const classroom = {
+        id: 3,
+        name: "Tầng 2 TT04",
+        capacity: 30
+      };
+      classroomService.updateClassroom(3, classroom).subscribe(newClassroom => {
+        expect(newClassroom).toEqual(classroom);
+      });
+      let req = httpMock.expectOne(API_URL + '/classrooms/3');
+      expect(req.request.method).toBe('PUT');
+      req.flush(classroom);
     })))
   afterEach(() => {
     httpMock.verify();
