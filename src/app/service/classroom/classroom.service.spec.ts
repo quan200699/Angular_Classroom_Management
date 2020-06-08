@@ -93,7 +93,13 @@ describe('ClassroomService', () => {
       let req = httpMock.expectOne(API_URL + '/classrooms/3');
       expect(req.request.method).toBe('PUT');
       req.flush(classroom);
-    })))
+    })));
+  it('should DELETE', async(inject([HttpTestingController, ClassroomService],
+    (httpClient: HttpTestingController, classroomService: ClassroomService) => {
+    classroomService.deleteClassroom(3).subscribe(()=>{});
+    let req = httpMock.expectOne(API_URL + '/classrooms/3');
+    expect(req.request.method).toBe('DELETE');
+    })));
   afterEach(() => {
     httpMock.verify();
   })
