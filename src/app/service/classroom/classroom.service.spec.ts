@@ -50,7 +50,7 @@ describe('ClassroomService', () => {
       req.flush(listClassroom);
     })));
 
-  it('should get and return this object', async(inject([HttpTestingController, ClassroomService],
+  it('should GET and return this object', async(inject([HttpTestingController, ClassroomService],
     (httpClient: HttpTestingController, classroomService: ClassroomService) => {
       const classroom = {
         id: 1,
@@ -64,6 +64,21 @@ describe('ClassroomService', () => {
       expect(req.request.method).toBe('GET');
       req.flush(classroom);
     })));
+
+  it('should POST and return this classroom', async(inject([HttpTestingController, ClassroomService],
+    (httpClient: HttpTestingController, classroomService: ClassroomService) => {
+      const classroom = {
+        id: 4,
+        name: "Tầng 2 TT04",
+        capacity: 30
+      };
+      classroomService.createClassroom(classroom).subscribe(newClassroom => {
+        expect(newClassroom).toEqual(classroom);
+      });
+      let req = httpMock.expectOne(API_URL + '/classrooms');
+      expect(req.request.method).toBe('POST');
+      req.flush(classroom);
+    })))
   afterEach(() => {
     httpMock.verify();
   })
